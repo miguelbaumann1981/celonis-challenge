@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'formula-paren',
@@ -7,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormulaParenComponent implements OnInit {
 
+  @Input() public type: string = '';
+  @Input() public expression: any;
+
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.expression);
   }
 
 }

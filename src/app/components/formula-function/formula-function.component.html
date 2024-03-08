@@ -1,0 +1,17 @@
+<span class="formula-function">
+    <ng-container *ngIf="arguments[0]?.left && arguments[0]?.right; else onlyType">
+        <formula-operator
+            [operatorType]="arguments[0]?.type"
+            [leftSide]="arguments[0]?.left"
+            [rightSide]="arguments[0]?.right"
+        ></formula-operator>
+    </ng-container>
+    
+    <ng-template #onlyType>
+        <formula-element 
+            [type]="arguments[0]?.type" 
+            [value]="arguments[0]?.value"
+        ></formula-element>
+    </ng-template>
+    
+</span>

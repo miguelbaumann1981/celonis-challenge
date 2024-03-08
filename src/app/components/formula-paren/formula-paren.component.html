@@ -1,3 +1,9 @@
-<span class="paren">
-    PI
+<span class="formula-paren">
+    <span class="formula-paren__block" *ngIf="expression">
+        <formula-operator
+            [operatorType]="expression?.type"
+            [leftSide]="expression?.left"
+            [rightSide]="expression?.right"
+        ></formula-operator>
+    </span>
 </span>

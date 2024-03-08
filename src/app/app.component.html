@@ -17,27 +17,7 @@
 
 
   <div class="visual-formula">
-    <!-- <formula-paren></formula-paren> -->
-    <!-- <div *ngIf="syntaxTree?.left">
-      {{syntaxTree?.left.type}}
-    </div>
-
-    <div *ngIf="syntaxTree?.type">
-      {{syntaxTree?.type}}
-    </div>
-
-    <div *ngIf="syntaxTree?.right">
-      {{syntaxTree?.right.type}}
-    </div> -->
-    <div *ngIf="syntaxTree?.type !== ''">
       <ng-template #dynamicComponentContainer></ng-template>
-    </div>
-
-    <div *ngIf="syntaxTree?.type === ''">
-      <ng-template #dynamicComponentContainer></ng-template>
-    </div>
-    
-    
   </div>
 
 

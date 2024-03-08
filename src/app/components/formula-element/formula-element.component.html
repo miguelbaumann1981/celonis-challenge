@@ -1,0 +1,15 @@
+
+<ng-container *ngIf="type !== 'FUNCTION'; else typeFunction">
+    <input [id]="id" class="formula-element" [value]="value" (change)="onChange($event)" />
+</ng-container>
+
+<ng-template #typeFunction>
+    <!-- <span class="formula-element">
+        {{ value }}
+    </span> -->
+    <formula-function
+        [arguments]="arguments"
+    ></formula-function>
+</ng-template>
+
+
