@@ -17,13 +17,8 @@
     </ng-template>
     
     
-    <span class="formula-operator__symbol">{{ operatorType }}</span>
-    <!-- <span class="formula-operator__symbol">    
-        <formula-element
-            [type]="operatorType" 
-            [value]="operatorType"
-        ></formula-element>
-    </span> -->
+    <!-- <span class="formula-operator__symbol">{{ operatorType }}</span> -->
+    <p-treeSelect [(ngModel)]="selectedNodes2" [options]="nodes" (onNodeSelect)="onSelect($event)"></p-treeSelect>
 
     
     <span class="formula-operator__right" *ngIf="rightSide?.type === 'PAREN'; else noParenRight">

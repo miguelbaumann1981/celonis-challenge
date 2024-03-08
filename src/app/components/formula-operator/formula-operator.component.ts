@@ -1,6 +1,7 @@
 import { Component, ComponentFactoryResolver, Input, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { HandleFormulaService } from 'src/app/services/handle-formula.service';
 import { Subject, takeUntil } from 'rxjs';
+import { OperatorsService } from 'src/app/services/operators.service';
 
 @Component({
   selector: 'formula-operator',
@@ -33,10 +34,21 @@ export class FormulaOperatorComponent implements OnInit, OnDestroy {
   public editedValue: any;
   public formulaOperator: string = '';
   public elementId: number = Math.floor(Math.random() * 100);
+  public nodes: any[] = [];
+  selectedNodes2: any[] = [];
 
-  constructor( private handleFormula: HandleFormulaService ) { }
+  constructor( 
+    private handleFormula: HandleFormulaService,
+    private operatorsService: OperatorsService ) {
+     
+     }
 
   ngOnInit(): void {
+    this.operatorsService.getOperators().subscribe((files) => {
+      console.log(files.data);
+      this.nodes = files.data;
+      this.selectedNodes2 = [this.nodes[0]];
+    });
     // console.log(this.leftSide);
     // console.log(this.rightSide);
 
@@ -74,6 +86,10 @@ export class FormulaOperatorComponent implements OnInit, OnDestroy {
 
   public onElementEvent(event: any): void {
     console.log('editedValue', event);
+  }
+
+  onSelect(event: any): void {
+    console.log(event);
   }
 
   ngOnDestroy(): void {
