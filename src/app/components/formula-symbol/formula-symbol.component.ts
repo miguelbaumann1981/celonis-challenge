@@ -18,10 +18,6 @@ export class FormulaSymbolComponent implements OnInit, OnDestroy {
   constructor( private operatorsService: OperatorsService ) { }
 
   ngOnInit(): void {
-    console.log(this.operatorType);
-
-    
-
     this.operatorsService.getOperators().pipe(takeUntil(this.destroy$)).subscribe((files) => {
       this.symbols = files.data;
       this.symbols.map((symbol) => {

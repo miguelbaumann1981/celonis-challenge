@@ -31,7 +31,8 @@ export class FormulaOperatorComponent implements OnInit, OnDestroy {
     arguments: []
   };
   public editedValue: any;
-  public formulaOperator: string = '';
+  public formulaBlock: string = '';
+  public formulaBlockArray: string[] = [];
   public elementId: number = Math.floor(Math.random() * 100);
   public formulaBuiltArray: string[] = [];
 
@@ -67,8 +68,9 @@ export class FormulaOperatorComponent implements OnInit, OnDestroy {
       };
     }
 
-    this.formulaOperator = this.leftSingleElement.value + ' ' + this.operatorType + ' ' + this.rightSingleElement.value;
-    console.log(this.formulaOperator);
+    this.formulaBlock = this.leftSingleElement.value + ' ' + this.operatorType + ' ' + this.rightSingleElement.value;
+    this.formulaBlockArray.push(this.formulaBlock);
+    // console.log('formulaBlockArray', this.formulaBlockArray);
 
   }
 

@@ -3,5 +3,25 @@
 .formula-paren {
     padding: 5px;
     // background-color: lightgreen;
+    &__block {
+        position: relative;
+        width: 100%;
+        display: inline-flex;
+        transition: 0.5s all ease;
+        &--buttons {
+            visibility: hidden;
+            position: absolute;
+            top: -20px;
+            right: 5px;
+            z-index: 1;
+            display: flex;
+            gap: 4px;
 
+        }
+        &:hover {
+            .formula-paren__block--buttons {
+                visibility: visible;
+            }
+        }
+    }
 }

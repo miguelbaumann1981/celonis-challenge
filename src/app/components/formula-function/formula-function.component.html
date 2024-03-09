@@ -1,4 +1,5 @@
 <span class="formula-function">
+    <span class="formula-function__label">{{ functionName }}</span>
     <ng-container *ngIf="arguments[0]?.left && arguments[0]?.right; else onlyType">
         <formula-operator
             [operatorType]="arguments[0]?.type"

@@ -12,4 +12,8 @@ export class OperatorsService {
   getOperators(): Observable<any> {
     return this.http.get<any>('assets/data/operators.json');
   }
+
+  getTypeValues(): Observable<any> {
+    return this.http.get<any>('assets/data/type-values.json');
+  }
 }

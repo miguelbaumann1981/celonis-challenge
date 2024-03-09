@@ -8,6 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class FormulaFunctionComponent implements OnInit {
 
   @Input() public type: string = '';
+  @Input() public functionName: string = '';
   @Input() public arguments: any[] = [];
 
   public argsFunction: any[] = [];

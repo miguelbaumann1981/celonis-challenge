@@ -1,3 +1,18 @@
 .formula-function {
     padding: 5px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid lightgreen;
+    background-color: rgb(208, 238, 208);
+    &__label {
+        height: 46px;
+        border-radius: 6px;
+        background-color: lightgreen;
+        padding: 4px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+    }
 }

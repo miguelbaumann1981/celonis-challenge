@@ -16,6 +16,9 @@ import {
 } from '@angular/common/http';
 import { FormulaSymbolComponent } from './components/formula-symbol/formula-symbol.component';
 import {ButtonModule} from 'primeng/button';
+import {DropdownModule} from 'primeng/dropdown';
+import {TooltipModule} from 'primeng/tooltip';
+import {ToastModule} from 'primeng/toast';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,10 @@ import {ButtonModule} from 'primeng/button';
     InputTextModule,
     TreeSelectModule,
     HttpClientModule,
-    ButtonModule
+    ButtonModule,
+    DropdownModule,
+    TooltipModule,
+    ToastModule
   ],
   providers: [HttpClientModule],
   bootstrap: [AppComponent]

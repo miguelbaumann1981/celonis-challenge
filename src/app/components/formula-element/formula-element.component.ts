@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Subject, takeUntil } from 'rxjs';
+import { OperatorsService } from 'src/app/services/operators.service';
 
 
 @Component({
@@ -7,7 +9,7 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angu
   styleUrls: ['./formula-element.component.scss']
 })
 export class FormulaElementComponent implements OnInit {
-  
+  private readonly destroy$ = new Subject<void>();
 
   @Input() public id: number = 0;
   @Input() public type: string = '';
@@ -16,24 +18,38 @@ export class FormulaElementComponent implements OnInit {
   @Input() public formula: string = '';
 
   @Output() submitElementEvent: EventEmitter<string> = new EventEmitter<string>();
+  @Output() submitSymbolEvent: EventEmitter<string> = new EventEmitter<string>();
 
   public operation: any[] = [];
   public elementEdited: any;
   public elemValue: any;
   // public id: number = Math.floor(Math.random() * 100);
+  public valueTypes: any[] = [];
+  public selectedValueType: any[] = [];
 
-  constructor( ) { }
+  constructor( private operatorsService: OperatorsService ) { }
 
   ngOnInit(): void {
-    // console.log(this.type, this.value);
-    // console.log(this.arguments);
-    // console.log('id??', this.value, this.id);
+    this.operatorsService.getTypeValues().pipe(takeUntil(this.destroy$)).subscribe((files) => {
+      this.valueTypes = files.data;
+      this.valueTypes.map((value) => {
+        if (this.type === value.key) {
+          this.selectedValueType.push(value);
+        }
+      })
+    });
   }
 
   public onChange(event: any) {
     this.submitElementEvent.emit(event.target.value);
   }
 
+  onSelect(event: any): void {
+    this.submitSymbolEvent.emit(event.node.label);
+  }
 
+  ngOnDestroy(): void {
+    this.destroy$.next(undefined);
+  }
 
 }

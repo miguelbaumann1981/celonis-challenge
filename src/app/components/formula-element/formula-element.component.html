@@ -1,6 +1,12 @@
 
 <ng-container *ngIf="type !== 'FUNCTION'; else typeFunction">
     <input [id]="id" class="formula-element" pInputText [value]="value" (change)="onChange($event)" />
+    <p-treeSelect
+        class="formula-symbol"
+        [(ngModel)]="selectedValueType" 
+        [options]="valueTypes" 
+        (onNodeSelect)="onSelect($event)"
+    ></p-treeSelect>
 </ng-container>
 
 <ng-template #typeFunction>
@@ -9,6 +15,7 @@
     </span> -->
     <formula-function
         [arguments]="arguments"
+        [functionName]="value"
     ></formula-function>
 </ng-template>
 

@@ -1,0 +1,20 @@
+{
+    "data": [
+        {
+            "key": "NUMBER",
+            "label": "Integer"
+          },
+          {
+            "key": "E",
+            "label": "Logarithm"
+          },
+          {
+            "key": "PI",
+            "label": "PI"
+          },
+          {
+            "key": "VARIABLE",
+            "label": "Variable"
+          }
+    ]
+}
