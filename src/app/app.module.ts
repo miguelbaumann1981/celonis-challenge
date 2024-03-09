@@ -14,7 +14,8 @@ import { TreeSelectModule } from 'primeng/treeselect';
 import {
   HttpClientModule,
 } from '@angular/common/http';
-
+import { FormulaSymbolComponent } from './components/formula-symbol/formula-symbol.component';
+import {ButtonModule} from 'primeng/button';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {
     DynamicComponent,
     FormulaOperatorComponent,
     FormulaFunctionComponent,
-    FormulaElementComponent
+    FormulaElementComponent,
+    FormulaSymbolComponent
   ],
   imports: [
     BrowserModule,
@@ -32,6 +34,7 @@ import {
     InputTextModule,
     TreeSelectModule,
     HttpClientModule,
+    ButtonModule
   ],
   providers: [HttpClientModule],
   bootstrap: [AppComponent]

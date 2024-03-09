@@ -15,7 +15,7 @@ export class FormulaElementComponent implements OnInit {
   @Input() public arguments: any[] = [];
   @Input() public formula: string = '';
 
-  @Output() elementEvent: EventEmitter<any> = new EventEmitter<any>();
+  @Output() submitElementEvent: EventEmitter<string> = new EventEmitter<string>();
 
   public operation: any[] = [];
   public elementEdited: any;
@@ -31,9 +31,7 @@ export class FormulaElementComponent implements OnInit {
   }
 
   public onChange(event: any) {
-    console.log(event.target.value);
-    // this.elementEdited = event.target.value;
-    // this.elementEvent.emit({id : this.id, elem: this.elementEdited});
+    this.submitElementEvent.emit(event.target.value);
   }
 
 

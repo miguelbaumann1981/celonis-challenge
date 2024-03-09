@@ -1,5 +1,5 @@
 
-<span class="formula-operator">
+<div class="formula-operator">
     <span class="formula-operator__left" *ngIf="leftSide?.type === 'PAREN'; else noParenLeft">
         <formula-paren [expression]="leftExpression"></formula-paren>
     </span>
@@ -10,15 +10,18 @@
             [type]="leftSingleElement.type" 
             [value]="leftSingleElement.value"
             [arguments]="leftSingleElement.arguments"
-            [formula]="formula"
-            (elementEvent)="onElementEvent($event)"
+            (submitElementEvent)="onElementEvent($event)"
         ></formula-element>
         <!-- <button>+</button> -->
     </ng-template>
     
     
-    <!-- <span class="formula-operator__symbol">{{ operatorType }}</span> -->
-    <p-treeSelect [(ngModel)]="selectedNodes2" [options]="nodes" (onNodeSelect)="onSelect($event)"></p-treeSelect>
+    <span class="formula-operator__symbol">
+        <formula-symbol
+            [operatorType]="operatorType"
+            (submitSymbolEvent)="onSymbolEvent($event)"
+        ></formula-symbol>
+    </span>
 
     
     <span class="formula-operator__right" *ngIf="rightSide?.type === 'PAREN'; else noParenRight">
@@ -30,9 +33,11 @@
             [type]="rightSingleElement.type" 
             [value]="rightSingleElement.value"
             [arguments]="rightSingleElement.arguments"
-            [id]="elementId"
+            (submitElementEvent)="onElementEvent($event)"
         ></formula-element>
     </ng-template>
-</span>
+</div>
+
+
 
 <!-- <pre>{{ formulaOperator }}</pre> -->

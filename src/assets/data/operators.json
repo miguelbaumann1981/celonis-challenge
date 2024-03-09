@@ -1,14 +1,28 @@
 {
     "data": [
         {
-            "key": "0",
-            "label": "+",
-            "data": "Documents Folder"
+            "key": "ADDITION",
+            "label": "+"
           },
           {
-            "key": "1",
-            "label": "-",
-            "data": "Documents Folder"
+            "key": "SUBTRACTION",
+            "label": "-"
+          },
+          {
+            "key": "MULTIPLICATION",
+            "label": "*"
+          },
+          {
+            "key": "DIVISION",
+            "label": "/"
+          },
+          {
+            "key": "POWER",
+            "label": "^"
+          },
+          {
+            "key": "NEGATION",
+            "label": "!"
           }
     ]
 }
