@@ -1,33 +1,43 @@
-<div>
-  <h1>Welcome to the formulizer!</h1>
+<div class="app-container">
 
-  <h3>Input formula</h3>
-  
-  <p><textarea cols="100" rows="8" [(ngModel)]="formula"></textarea><br></p>
-  
-  <p><button (click)="updateAstView()">Parse and update AST View</button></p>
-  
-  <h3>Visualizer</h3>
-  <pre style="max-height: 300px; overflow-y: auto;background-color: #eeeeee;">{{syntaxTreeJson}}</pre>
-  <p><button (click)="convertAstToFormula()">Convert AST to Formula</button></p>
-  
-  
-  <h3>Visualizer-to-Formula</h3>
-  <p>{{ visualizerOutput }}</p>
-
-
-  <div class="visual-formula">
-      <ng-template #dynamicComponentContainer>
-
-      </ng-template>
+  <header class="app-container__header">
+    <div class="app-container__header--title">
+      <img src="../assets/img/celonis-logo.png" alt="Logo Celonis">
+      <span>Formulizer</span>
     </div>
+    <div class="app-container__header--settings">Flags</div>
+  </header>
+
+  <main class="app-container__content">
+    <h1 class="app-container__content--welcome">Welcome to the formulizer!</h1>
+    <section class="app-container__content--visualizer">
+      <div class="app-container__content--visualizer-block">
+      
+        <span class="p-float-label">
+          <textarea inputId="textarea" pInputTextarea cols="100" rows="8" [(ngModel)]="formula"></textarea>
+          <label for="textarea">Input formula</label>
+        </span>
+        
+        <button pButton pRipple type="button" label="Parse and update AST View" class="p-button-raised p-button-info" (click)="updateAstView()"></button>
+      </div>
+      
+      <div *ngIf="syntaxTreeJson" class="app-container__content--visualizer-block">
+        <pre>{{syntaxTreeJson}}</pre>
+        <button pButton pRipple type="button" label="Convert AST to Formula" class="p-button-raised p-button-info" (click)="convertAstToFormula()"></button>
+      </div>
+    </section>
     
-    <br>
-    <br>
-    <div>
-      <p-button label="Submit" icon="pi pi-check" (click)="onSubmit()"></p-button>
-    </div>
+    <section class="app-container__content--converter">
+      <h3 class="app-container__content--converter-title">Visualizer to Formula</h3>
+      <div class="app-container__content--converter-view">
+          <ng-template #dynamicComponentContainer></ng-template>
+        </div>
+    </section>
+    
+  </main>
 
-
-
+  <div *ngIf="toastMessage" class="app-container__toast">
+    {{ toastMessage }}
+    <button (click)="closeToast()">X</button>
+  </div>
 </div>

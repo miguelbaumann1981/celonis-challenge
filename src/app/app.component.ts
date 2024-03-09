@@ -6,6 +6,7 @@ import { DynamicComponent } from './components/dynamic/dynamic.component';
 import { FormulaOperatorComponent } from './components/formula-operator/formula-operator.component';
 import { HandleFormulaService } from './services/handle-formula.service';
 import { Subject, takeUntil } from 'rxjs';
+import { HandleToastService } from './services/handle-toast.service';
 const parse = Parser.parse;
 
 type operator = 'ADDITION' | 'SUBTRACTION' | 'MULTIPLICATION' | 'DIVISION';
@@ -13,7 +14,7 @@ type operator = 'ADDITION' | 'SUBTRACTION' | 'MULTIPLICATION' | 'DIVISION';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
   private readonly destroy$ = new Subject<void>();
@@ -22,18 +23,20 @@ export class AppComponent implements OnInit {
 
   // formula: string = "SQRT (SQR($b) - 4 * $a)";
   // formula: string = "($b + SQRT (SQR($b) - 4 * $a)) / (2 * $a)";
-  formula: string = "(4 - 3) / (2 * $a)";
-  // formula: string = "(4 - SQR($b - 8)) / (2 * $a)";
+  // formula: string = "(4 - 3) / (2 * $a)";
+  formula: string = "(4 - SQR($b - 8)) / (2 * $a)";
   visualizerOutput: string = "";
   syntaxTree: any;
   syntaxTreeJson: string = "";
   public showDynamicComponent: boolean = false;
   public formulaBuiltArray: string[] = [];
+  public toastMessage: string = '';
  
 
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
-    private handleFormula: HandleFormulaService 
+    private handleFormula: HandleFormulaService ,
+    private handleToast: HandleToastService
   ) {}
 
   ngOnInit(): void {
@@ -47,6 +50,15 @@ export class AppComponent implements OnInit {
         // this.formula = transform;
       }
     });
+
+    this.handleToast.getToastMessage().pipe(takeUntil(this.destroy$)).subscribe(message => {
+      if (message) {
+        this.toastMessage = message;
+        // setTimeout(() => {
+        //   this.toastMessage = '';
+        // }, 3000);
+      }
+    })
   }
 
   addComponent(message: string) {
@@ -95,6 +107,10 @@ export class AppComponent implements OnInit {
       const transform = this.formulaBuiltArray.toString();
       console.log(transform);
     this.formula = transform.replace(/,/g, ' ');
+  }
+
+  closeToast(): void {
+    this.toastMessage = '';
   }
 
 }

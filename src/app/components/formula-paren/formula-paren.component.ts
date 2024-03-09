@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {MessageService} from 'primeng/api';
+import { MessageService } from 'primeng/api';
+import {MenuItem} from 'primeng/api';
+import { HandleToastService } from 'src/app/services/handle-toast.service';
 
 @Component({
   selector: 'formula-paren',
@@ -9,21 +11,48 @@ import {MessageService} from 'primeng/api';
 })
 export class FormulaParenComponent implements OnInit {
 
+  @Input() public id: number = 0;
   @Input() public type: string = '';
   @Input() public expression: any;
 
-  constructor(private messageService: MessageService) { }
+  items: MenuItem[] = [];
+  public isMenuOpen: boolean = false;
+
+  constructor(
+    private handleToast: HandleToastService,
+    private messageService: MessageService, 
+  ) { }
 
   ngOnInit(): void {
-    console.log(this.expression);
+    console.log(this.id);
+
+    this.items = [
+      {
+        label: 'New', 
+        icon: 'pi pi-fw pi-plus', 
+        command: () => {
+          this.showSuccess();
+        }
+      },
+      {label: 'Open', icon: 'pi pi-fw pi-download'},
+      {label: 'Undo', icon: 'pi pi-fw pi-refresh'}
+  ];
   }
 
-  showError() {
-    this.messageService.add({severity:'error', summary: 'Error', detail: 'Message Content'});
+  showMenu(_id: number): void {
+    if (this.id === _id) {
+      this.isMenuOpen = !this.isMenuOpen;
+    } 
+  }
+
+
+
+  showSuccess() {
+    this.handleToast.setToastMessage('Sorry.......');
+    setTimeout(() => {
+      this.isMenuOpen = false;
+    }, 3000);
 }
 
-onReject() {
-  this.messageService.clear('c');
-}
 
 }

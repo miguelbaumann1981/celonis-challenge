@@ -1,18 +1,16 @@
 
 <div class="formula-operator">
-    <span class="formula-operator__left" *ngIf="leftSide?.type === 'PAREN'; else noParenLeft">
-        <formula-paren [expression]="leftExpression"></formula-paren>
+    <span  class="formula-operator__left" *ngIf="leftSide?.type === 'PAREN'; else noParenLeft">
+        <formula-paren [id]="idParenLeft" [expression]="leftExpression"></formula-paren>
     </span>
     
     <ng-template #noParenLeft>
         <formula-element 
-            [id]="elementId"
             [type]="leftSingleElement.type" 
             [value]="leftSingleElement.value"
             [arguments]="leftSingleElement.arguments"
             (submitElementEvent)="onElementEvent($event)"
         ></formula-element>
-        <!-- <button>+</button> -->
     </ng-template>
     
     
@@ -25,7 +23,7 @@
 
     
     <span class="formula-operator__right" *ngIf="rightSide?.type === 'PAREN'; else noParenRight">
-        <formula-paren [expression]="rightExpression"></formula-paren>
+        <formula-paren [id]="idParenRight" [expression]="rightExpression"></formula-paren>
     </span>
     
     <ng-template #noParenRight>

@@ -9,19 +9,29 @@
         display: inline-flex;
         transition: 0.5s all ease;
         &--buttons {
-            visibility: hidden;
+            // visibility: hidden;
             position: absolute;
-            top: -20px;
-            right: 5px;
+            top: -17px;
+            right: -8px;
             z-index: 1;
             display: flex;
             gap: 4px;
+            &-menu {
+                border-radius: 50%;
+                height: 1.5rem;
+                background-color: #fffaec;
+                color: rgb(243, 202, 98);
+                border: 1px solid rgb(247, 233, 197);
+                width: 1.5rem;
+                font-size: 1rem;
+                cursor: pointer;
+            }
 
         }
-        &:hover {
-            .formula-paren__block--buttons {
-                visibility: visible;
-            }
-        }
+        // &:hover {
+        //     .formula-paren__block--buttons {
+        //         visibility: visible;
+        //     }
+        // }
     }
 }

@@ -2,7 +2,7 @@
 <ng-container *ngIf="type !== 'FUNCTION'; else typeFunction">
     <input [id]="id" class="formula-element" pInputText [value]="value" (change)="onChange($event)" />
     <p-treeSelect
-        class="formula-symbol"
+        class="formula-element-symbol"
         [(ngModel)]="selectedValueType" 
         [options]="valueTypes" 
         (onNodeSelect)="onSelect($event)"

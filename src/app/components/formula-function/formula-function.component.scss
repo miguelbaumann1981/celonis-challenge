@@ -1,18 +1,20 @@
 .formula-function {
-    padding: 5px;
+    padding: 2px 4px;
     display: flex;
     align-items: center;
     gap: 6px;
-    border: 1px solid lightgreen;
-    background-color: rgb(208, 238, 208);
+    border: 1px solid rgb(227, 144, 238);
+    background-color: #f8deff;
+    border-radius: 6px;
     &__label {
-        height: 46px;
+        height: 40px;
         border-radius: 6px;
-        background-color: lightgreen;
-        padding: 4px;
+        background-color: rgb(227, 144, 238);
+        padding: 6px;
         display: flex;
         justify-content: center;
         flex-direction: column;
         text-align: center;
+        color: #fff;
     }
 }

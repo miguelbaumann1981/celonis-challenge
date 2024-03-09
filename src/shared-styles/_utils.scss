@@ -1,0 +1,70 @@
+@import '_colors.scss';
+@import '_breakpoints.scss';
+
+* {
+  font-family: "Nunito Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-size: 16px;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100,
+    "YTLC" 500;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+// VARIABLES
+//--- Space header and home page
+$paddingContainer: 4rem;
+$heightHeaderDesktop: 6.25rem;
+$heightHeaderMobile: 5rem;
+
+$standardTransition: 0.35s all ease;
+
+// COMMON STYLES
+
+
+
+
+::-webkit-scrollbar {
+  // Width of vertical scroll bar
+  width: 12px;
+  // Height of horizontal scroll bar
+  height: 12px;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 20px;
+  background: $neutral-light-color;
+}
+
+
+
+
+@media (max-width: $size-xl) {
+  * {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: $size-lg) {
+  * {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: $size-md) {
+  * {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: $size-sm) {
+  * {
+    font-size: 13px;
+  }
+}

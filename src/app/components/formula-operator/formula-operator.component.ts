@@ -33,7 +33,8 @@ export class FormulaOperatorComponent implements OnInit, OnDestroy {
   public editedValue: any;
   public formulaBlock: string = '';
   public formulaBlockArray: string[] = [];
-  public elementId: number = Math.floor(Math.random() * 100);
+  public idParenLeft: number = 0;
+  public idParenRight: number = 0;
   public formulaBuiltArray: string[] = [];
 
   constructor( 
@@ -48,6 +49,8 @@ export class FormulaOperatorComponent implements OnInit, OnDestroy {
       console.log('Formula en element', formula);
     });
     
+    this.idParenLeft = Math.floor(Math.random() * 1000);
+    this.idParenRight = Math.floor(Math.random() * 1000);
     if (this.leftSide?.expression) {
       this.leftExpression = this.leftSide?.expression;
     } else {

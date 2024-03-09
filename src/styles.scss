@@ -1,12 +1,7 @@
+@import './shared-styles/colors';
+@import './shared-styles/breakpoints';
+@import './shared-styles/utils';
+@import './shared-styles/external';
 
-.p-tree .p-tree-container .p-treenode .p-treenode-content .p-tree-toggler {
-    display: none;
-}
 
 
-.p-button.p-button-icon-only.p-button-rounded {
-    height: 2rem !important;
-}
-.p-button.p-button-icon-only {
-    width: 2rem !important;
-}

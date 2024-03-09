@@ -15,10 +15,13 @@ import {
   HttpClientModule,
 } from '@angular/common/http';
 import { FormulaSymbolComponent } from './components/formula-symbol/formula-symbol.component';
-import {ButtonModule} from 'primeng/button';
-import {DropdownModule} from 'primeng/dropdown';
-import {TooltipModule} from 'primeng/tooltip';
-import {ToastModule} from 'primeng/toast';
+import { ButtonModule } from 'primeng/button';
+import { DropdownModule } from 'primeng/dropdown';
+import { TooltipModule } from 'primeng/tooltip';
+import { ToastModule } from 'primeng/toast';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { MenuModule } from 'primeng/menu';
+import {RippleModule} from 'primeng/ripple';
 
 @NgModule({
   declarations: [
@@ -40,7 +43,10 @@ import {ToastModule} from 'primeng/toast';
     ButtonModule,
     DropdownModule,
     TooltipModule,
-    ToastModule
+    ToastModule,
+    InputTextareaModule,
+    MenuModule,
+    RippleModule
   ],
   providers: [HttpClientModule],
   bootstrap: [AppComponent]
