@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import {MenuItem} from 'primeng/api';
+import { MenuItem } from 'primeng/api';
+import { ToastNotification } from 'src/app/interfaces/ToastNotification';
 import { HandleToastService } from 'src/app/services/handle-toast.service';
 
 @Component({
@@ -31,12 +32,12 @@ export class FormulaParenComponent implements OnInit {
         label: 'New', 
         icon: 'pi pi-fw pi-plus', 
         command: () => {
-          this.showSuccess();
+          this.showToast();
         }
       },
       {label: 'Open', icon: 'pi pi-fw pi-download'},
       {label: 'Undo', icon: 'pi pi-fw pi-refresh'}
-  ];
+    ];
   }
 
   showMenu(_id: number): void {
@@ -47,12 +48,16 @@ export class FormulaParenComponent implements OnInit {
 
 
 
-  showSuccess() {
-    this.handleToast.setToastMessage('Sorry.......');
+  showToast() {
+    const toast: ToastNotification = {
+      type: 'error',
+      message: 'Sorry....'
+    }
+    this.handleToast.setToastMessage(toast);
     setTimeout(() => {
       this.isMenuOpen = false;
     }, 3000);
-}
+  }
 
 
 }

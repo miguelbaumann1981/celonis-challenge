@@ -36,6 +36,7 @@ export class FormulaOperatorComponent implements OnInit, OnDestroy {
   public idParenLeft: number = 0;
   public idParenRight: number = 0;
   public formulaBuiltArray: string[] = [];
+  public isFormatBanned: boolean = false;
 
   constructor( 
     private handleFormula: HandleFormulaService,

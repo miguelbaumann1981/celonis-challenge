@@ -1,0 +1,23 @@
+<div class="alert">
+    <div class="alert__main-info">
+        <p class="not-allowed__main">Formato no permitido. Pruebe otra formula</p>
+        <button 
+            pButton 
+            pRipple type="button" 
+            icon="pi pi-bell" 
+            class="p-button-rounded p-button-warning p-button-outlined"
+            pTooltip="Leer sugerencias"
+            (click)="toggleExamples()"
+        ></button>
+    </div>
+
+    <div *ngIf="showExamples" class="alert__examples">
+        <p>Algunos ejemplos:</p>
+        <ul>
+            <li>2 + 1</li>
+            <li>(4 - 3) / (2 * $a)</li>
+            <li>(4 - SQR($b - 8)) / (2 * $a)</li>
+        </ul>
+    </div>
+</div>
+

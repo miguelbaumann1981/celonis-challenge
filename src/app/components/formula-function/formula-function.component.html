@@ -14,5 +14,15 @@
             [value]="arguments[0]?.value"
         ></formula-element>
     </ng-template>
-    
+
+    <span class="formula-function__buttons">
+        <p-menu *ngIf="isMenuOpen" [model]="items"></p-menu>
+        <button 
+            class="formula-function__buttons--menu" 
+            pTooltip="Show options" 
+            tooltipPosition="top"
+            (click)="showMenu(id)">
+            <span>...</span>
+        </button>
+    </span>
 </span>

@@ -6,6 +6,7 @@
     border: 1px solid rgb(227, 144, 238);
     background-color: #f8deff;
     border-radius: 6px;
+    position: relative;
     &__label {
         height: 40px;
         border-radius: 6px;
@@ -16,5 +17,32 @@
         flex-direction: column;
         text-align: center;
         color: #fff;
+    }
+    &__buttons {
+        position: absolute;
+        top: -14px;
+        right: 19px;
+        z-index: 1;
+        display: flex;
+        gap: 4px;
+        &--menu {
+            border-radius: 50%;
+            height: 1.5rem;
+            background-color: #f8deff;
+            border: 1px solid rgb(227, 144, 238);
+            width: 1.5rem;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            padding-bottom: 7px;
+            span {
+                color: rgb(159, 88, 168);
+                font-weight: 700;
+            }
+        }
     }
 }

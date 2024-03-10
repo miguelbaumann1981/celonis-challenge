@@ -17,6 +17,7 @@
         justify-content: space-between;
         align-items: center;
         box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+        z-index: 1;
         &--title {
             display: flex;
             align-items: center;
@@ -38,7 +39,7 @@
         width: 100%;
         padding: 1rem $paddingContainer 2rem;
         position: absolute;
-        top: 93px;
+        top: 96px;
         left: 0;
         height: calc(100vh - 6rem);
         background-color: $neutral-extra-light-color;
@@ -73,10 +74,11 @@
                     font-size: 0.8rem;
                     font-family: monospace;
                     border: 1px solid #ddd; 
-                    max-height: 300px; 
+                    max-height: 202px; 
                     overflow-y: auto;
                     background-color: #fff;
                     padding: 0.75rem;
+                    border-radius: 6px;
                 }
             }
         }
@@ -103,10 +105,5 @@
         position: absolute;
         top: 120px;
         right: 40px;
-        width: 300px;
-        padding: 1rem 2rem;
-        background-color: lightcoral;
-        border-radius: 6px;
-        color: white;
     }
 }

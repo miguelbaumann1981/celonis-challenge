@@ -23,13 +23,14 @@ export class FormulaElementComponent implements OnInit {
   public operation: any[] = [];
   public elementEdited: any;
   public elemValue: any;
-  // public id: number = Math.floor(Math.random() * 100);
+  public functionId: number = Math.floor(Math.random() * 1000);
   public valueTypes: any[] = [];
   public selectedValueType: any[] = [];
 
   constructor( private operatorsService: OperatorsService ) { }
 
   ngOnInit(): void {
+    console.log(this.value);
     this.operatorsService.getTypeValues().pipe(takeUntil(this.destroy$)).subscribe((files) => {
       this.valueTypes = files.data;
       this.valueTypes.map((value) => {

@@ -2,14 +2,12 @@
 
 .formula-paren {
     padding: 5px;
-    // background-color: lightgreen;
     &__block {
         position: relative;
         width: 100%;
         display: inline-flex;
         transition: 0.5s all ease;
         &--buttons {
-            // visibility: hidden;
             position: absolute;
             top: -17px;
             right: -8px;
@@ -20,18 +18,21 @@
                 border-radius: 50%;
                 height: 1.5rem;
                 background-color: #fffaec;
-                color: rgb(243, 202, 98);
                 border: 1px solid rgb(247, 233, 197);
                 width: 1.5rem;
                 font-size: 1rem;
+                font-weight: 700;
                 cursor: pointer;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                text-align: center;
+                padding-bottom: 7px;
+                span {
+                    color: #d1af57;
+                    font-weight: 700;
+                }
             }
-
         }
-        // &:hover {
-        //     .formula-paren__block--buttons {
-        //         visibility: visible;
-        //     }
-        // }
     }
 }

@@ -36,8 +36,10 @@
     
   </main>
 
-  <div *ngIf="toastMessage" class="app-container__toast">
-    {{ toastMessage }}
-    <button (click)="closeToast()">X</button>
+  <div *ngIf="toastNotification.message" class="app-container__toast">
+    <toast-notification
+      [toastNotification]="toastNotification"
+      (closeToastEvent)="closeToast()"
+    ></toast-notification>
   </div>
 </div>

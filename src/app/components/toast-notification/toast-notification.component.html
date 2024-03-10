@@ -1,0 +1,13 @@
+<div class="toast-notification" [ngClass]="{ 'success': toastNotification.type === 'success', 'error': toastNotification.type === 'error' }">
+    {{ toastNotification.message }}
+
+    <button 
+        *ngIf="toastNotification.message" 
+        pButton 
+        pRipple 
+        type="button" 
+        icon="pi pi-times" 
+        class="p-button-rounded {{ toastNotification.type === 'success' ? 'p-button-success' : 'p-button-danger' }} p-button-text"
+        (click)="closeToastEvent.emit()"
+    ></button>
+</div>

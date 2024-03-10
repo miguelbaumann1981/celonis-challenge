@@ -7,6 +7,7 @@ import { FormulaOperatorComponent } from './components/formula-operator/formula-
 import { HandleFormulaService } from './services/handle-formula.service';
 import { Subject, takeUntil } from 'rxjs';
 import { HandleToastService } from './services/handle-toast.service';
+import { ToastNotification } from './interfaces/ToastNotification.js';
 const parse = Parser.parse;
 
 type operator = 'ADDITION' | 'SUBTRACTION' | 'MULTIPLICATION' | 'DIVISION';
@@ -30,7 +31,7 @@ export class AppComponent implements OnInit {
   syntaxTreeJson: string = "";
   public showDynamicComponent: boolean = false;
   public formulaBuiltArray: string[] = [];
-  public toastMessage: string = '';
+  public toastNotification: ToastNotification = {};
  
 
   constructor(
@@ -51,11 +52,11 @@ export class AppComponent implements OnInit {
       }
     });
 
-    this.handleToast.getToastMessage().pipe(takeUntil(this.destroy$)).subscribe(message => {
-      if (message) {
-        this.toastMessage = message;
+    this.handleToast.getToastMessage().pipe(takeUntil(this.destroy$)).subscribe(toast => {
+      if (toast) {
+        this.toastNotification = toast;
         // setTimeout(() => {
-        //   this.toastMessage = '';
+        //   this.toast = '';
         // }, 3000);
       }
     })
@@ -110,7 +111,7 @@ export class AppComponent implements OnInit {
   }
 
   closeToast(): void {
-    this.toastMessage = '';
+    this.toastNotification = {};
   }
 
 }

@@ -22,6 +22,8 @@ import { ToastModule } from 'primeng/toast';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { MenuModule } from 'primeng/menu';
 import {RippleModule} from 'primeng/ripple';
+import { ToastNotificationComponent } from './components/toast-notification/toast-notification.component';
+import { AlertNotificationComponent } from './components/alert-notification/alert-notification.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import {RippleModule} from 'primeng/ripple';
     FormulaOperatorComponent,
     FormulaFunctionComponent,
     FormulaElementComponent,
-    FormulaSymbolComponent
+    FormulaSymbolComponent,
+    ToastNotificationComponent,
+    AlertNotificationComponent
   ],
   imports: [
     BrowserModule,
