@@ -33,7 +33,7 @@ export class FormulaSymbolComponent implements OnInit, OnDestroy {
         if (this.operatorType === symbol.key) {
           this.selectedSymbol.push(symbol);
         }
-      })
+      });
     });
   }
 
