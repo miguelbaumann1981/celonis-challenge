@@ -1,4 +1,4 @@
-import { Component, ComponentFactoryResolver, OnInit, Type, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 
 // @ts-ignore
 import * as Parser from './parser/formula-parser.js';
@@ -10,7 +10,6 @@ import { ToastNotification } from './interfaces/ToastNotification.js';
 import { TranslateService } from '@ngx-translate/core';
 const parse = Parser.parse;
 
-type operator = 'ADDITION' | 'SUBTRACTION' | 'MULTIPLICATION' | 'DIVISION';
 
 @Component({
   selector: 'app-root',
@@ -19,6 +18,7 @@ type operator = 'ADDITION' | 'SUBTRACTION' | 'MULTIPLICATION' | 'DIVISION';
 })
 export class AppComponent implements OnInit {
   private readonly destroy$ = new Subject<void>();
+  
   @ViewChild('dynamicComponentContainer', { read: ViewContainerRef }) 
   dynamicComponentContainer!: ViewContainerRef;
 
@@ -26,20 +26,22 @@ export class AppComponent implements OnInit {
   // formula: string = "($b + SQRT (SQR($b) - 4 * $a)) / (2 * $a)";
   // formula: string = "(4 - 3) / (2 * $a)";
   public formula: string = "(4 - SQR($b - 8)) / (2 * $a)";
+  // public formula: string = "(2 * $a)";
   public syntaxTree: any;
   public syntaxTreeJson: string = "";
   public formulaBuiltArray: string[] = [];
   public toastNotification: ToastNotification = {};
+  public selectedLanguage: string = 'uk';
+  public isConverterEnabled: boolean = false;
  
 
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
     private handleFormula: HandleFormulaService ,
     private handleToast: HandleToastService,
-    translate: TranslateService
+    public translate: TranslateService
   ) {
-      translate.setDefaultLang('en');
-      translate.use('en');
+      this.translate.setDefaultLang('en');
     }
 
   ngOnInit(): void {
@@ -67,6 +69,11 @@ export class AppComponent implements OnInit {
     this.handleToast.getToastMessage().pipe(takeUntil(this.destroy$)).subscribe(toast => {
       if (toast) {
         this.toastNotification = toast;
+        if (this.toastNotification.type === 'success') {
+          setTimeout(() => {
+            this.toastNotification = {};
+          }, 3000);
+        }
       }
     });
   }
@@ -87,7 +94,8 @@ export class AppComponent implements OnInit {
     ** Method to update syntaxTree and show it in view
   */
   public updateAstView() {
-    this.handleFormula.setFormula(this.formula);
+    this.isConverterEnabled = false;
+    this.handleFormula.setFormula('');
     this.dynamicComponentContainer.clear();
     this.syntaxTree = parse(this.formula);
     this.syntaxTreeJson = JSON.stringify(this.syntaxTree, null, 2);
@@ -98,6 +106,7 @@ export class AppComponent implements OnInit {
   */
   public convertAstToFormula() {
     if (this.syntaxTree) {
+      this.isConverterEnabled = true;
       this.addOperatorComponent(this.syntaxTree?.type, this.syntaxTree?.left, this.syntaxTree?.right);
     }
   }
@@ -107,6 +116,19 @@ export class AppComponent implements OnInit {
   */
   public closeToast(): void {
     this.toastNotification = {};
+  }
+
+  /*
+    ** Method to set the language
+  */
+  public selectLanguage(country: string): void {
+    this.selectedLanguage = country;
+    if (this.selectedLanguage === 'uk') {
+        this.translate.use('en');
+    }
+    if (this.selectedLanguage === 'spain') {
+      this.translate.use('es');
+    }
   }
 
 }

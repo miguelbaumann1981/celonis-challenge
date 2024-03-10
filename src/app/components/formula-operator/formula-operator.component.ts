@@ -2,6 +2,10 @@ import { Component, ComponentFactoryResolver, Input, OnDestroy, OnInit, ViewChil
 import { HandleFormulaService } from 'src/app/services/handle-formula.service';
 import { Subject, takeUntil } from 'rxjs';
 import { SideBlockOperator } from 'src/app/interfaces/SideBlockOperator';
+import { HandleToastService } from 'src/app/services/handle-toast.service';
+import { ToastNotification } from 'src/app/interfaces/ToastNotification';
+import { TranslatePipe } from '@ngx-translate/core';
+import { Type } from 'src/app/enums/Operators';
 
 @Component({
   selector: 'formula-operator',
@@ -35,7 +39,11 @@ export class FormulaOperatorComponent implements OnInit, OnDestroy {
   public parenRightId: number = Math.floor(Math.random() * 1000);
   public formulaBuiltArray: string[] = [];
 
-  constructor(private handleFormula: HandleFormulaService) {}
+  constructor(
+    private handleFormula: HandleFormulaService,
+    private handleToast: HandleToastService,
+    private translatePipe: TranslatePipe
+  ) {}
 
   ngOnInit(): void {
     this.assignmentValuesLeftBlock();
@@ -54,7 +62,7 @@ export class FormulaOperatorComponent implements OnInit, OnDestroy {
     } else {
       this.leftSingleElement = {
         type: this.leftSide?.type,
-        value: this.leftSide?.type === 'NUMBER' || this.leftSide?.type === 'PI' ? this.leftSide?.value : this.leftSide?.name,
+        value: this.mapValueByType(this.leftSide, this.leftSide?.type),
         arguments: this.leftSide?.type === 'FUNCTION' ? this.leftSide?.arguments : [] 
       };
     }
@@ -69,9 +77,27 @@ export class FormulaOperatorComponent implements OnInit, OnDestroy {
     } else {
       this.rightSingleElement = {
         type: this.rightSide?.type,
-        value: this.rightSide?.type === 'NUMBER' || this.rightSide?.type === 'PI' ? this.rightSide?.value : this.rightSide?.name,
+        value: this.mapValueByType(this.rightSide, this.rightSide?.type),
         arguments: this.rightSide?.type === 'FUNCTION' ? this.rightSide?.arguments : []
       };
+    }
+  }
+
+  /*
+    ** Method to map the value by type
+  */
+  public mapValueByType(side: any, type: string): any {
+    switch (type) {
+      case Type.Number:
+        return side?.value;
+      case Type.Pi:
+        return Type.Pi;
+      case Type.Function:
+        return side?.name;
+      case Type.Variable:
+        return side?.name;
+      case Type.Paren:
+        return side?.name;
     }
   }
 
@@ -80,6 +106,12 @@ export class FormulaOperatorComponent implements OnInit, OnDestroy {
   */
   public onElementEvent(element: string): void {
     this.handleFormula.setSingleElement(element);
+
+    const toast: ToastNotification = {
+      type: 'success',
+      message: this.translatePipe.transform('operator.toast_message_success')
+    }
+    this.handleToast.setToastMessage(toast);
   }
 
   /*
@@ -87,6 +119,12 @@ export class FormulaOperatorComponent implements OnInit, OnDestroy {
   */
   public onSymbolEvent(symbol: string): void {
     this.handleFormula.setSingleElement(symbol);
+
+    const toast: ToastNotification = {
+      type: 'success',
+      message: this.translatePipe.transform('operator.toast_message_success')
+    }
+    this.handleToast.setToastMessage(toast);
   }
 
   ngOnDestroy(): void {

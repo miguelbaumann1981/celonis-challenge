@@ -15,5 +15,13 @@
         "menu_add_element": "Add element",
         "menu_delete_block": "Delete block",
         "toast_message_error": "This functionality is not enabled"
+    },
+    "operator": {
+        "toast_message_success": "Element added successfully"
+    },
+    "alert": {
+        "format_not_allowed": "Formula format not allowed!... Please try another formula",
+        "tooltip_button": "See suggestions",
+        "examples": "Some examples:"
     }
 }

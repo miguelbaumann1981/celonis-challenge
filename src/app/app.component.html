@@ -9,7 +9,10 @@
     <!-- #endregion -->
 
     <!-- #region LANGUAGES -->
-    <div class="app-container__header--settings">Flags</div>
+    <div class="app-container__header--settings">
+      <img src="../assets/img/uk.svg" alt="UK flag" [ngClass]="selectedLanguage === 'uk' ? 'selected' : 'unselected'" (click)="selectLanguage('uk')" />
+      <img src="../assets/img/spain.svg" alt="Spain flag" [ngClass]="selectedLanguage === 'spain' ? 'selected' : 'unselected'" (click)="selectLanguage('spain')" />
+    </div>
   </header>
   <!-- #endregion -->
 
@@ -40,7 +43,7 @@
           pRipple 
           type="button" 
           label="{{ 'main.input_formula_button' | translate }}" 
-          class="p-button-raised p-button-success" 
+          class="p-button-raised p-button-secondary" 
           (click)="updateAstView()"
         ></button>
       </div>
@@ -54,7 +57,7 @@
           pRipple 
           type="button" 
           label="{{ 'main.json_visualizer_button' | translate }}" 
-          class="p-button-raised p-button-success" 
+          class="p-button-raised p-button-secondary" 
           (click)="convertAstToFormula()"
         ></button>
       </div>
@@ -63,7 +66,7 @@
     <!-- #endregion -->
     
     <!-- #region CONVERTER -->
-    <section class="app-container__content--converter">
+    <section class="app-container__content--converter" [ngClass]="isConverterEnabled ? 'enabled' : 'disbled'">
       <h3 class="app-container__content--converter-title">{{ 'main.converter_title' | translate }}</h3>
       <div class="app-container__content--converter-view">
           <ng-template #dynamicComponentContainer></ng-template>

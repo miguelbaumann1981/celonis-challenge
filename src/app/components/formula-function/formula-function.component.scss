@@ -1,22 +1,24 @@
+@import '../../../shared-styles/colors';
+
 .formula-function {
-    padding: 2px 4px;
+    padding: 0.125rem 0.25rem;
     display: flex;
     align-items: center;
-    gap: 6px;
-    border: 1px solid rgb(227, 144, 238);
-    background-color: #f8deff;
+    gap: 0.4rem;
+    border: 1px solid $functionBlockBorder;
+    background-color: $functionBlockBackground;
     border-radius: 6px;
     position: relative;
     &__label {
         height: 40px;
         border-radius: 6px;
-        background-color: rgb(227, 144, 238);
-        padding: 6px;
+        background-color: $functionBlockBorder;
+        padding: 0.4rem;
         display: flex;
         justify-content: center;
         flex-direction: column;
         text-align: center;
-        color: #fff;
+        color: $whiteColor;
     }
     &__buttons {
         position: absolute;
@@ -24,12 +26,12 @@
         right: 19px;
         z-index: 1;
         display: flex;
-        gap: 4px;
+        gap: 0.25rem;
         &--menu {
             border-radius: 50%;
             height: 1.5rem;
-            background-color: #f8deff;
-            border: 1px solid rgb(227, 144, 238);
+            background-color: $functionBlockBackground;
+            border: 1px solid $functionBlockBorder;
             width: 1.5rem;
             font-size: 1rem;
             font-weight: 700;
@@ -40,7 +42,7 @@
             text-align: center;
             padding-bottom: 7px;
             span {
-                color: rgb(159, 88, 168);
+                color: $functionBlockLabel;
                 font-weight: 700;
             }
         }

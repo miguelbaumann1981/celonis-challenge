@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
 import { ToastNotification } from 'src/app/interfaces/ToastNotification';
 import { HandleToastService } from 'src/app/services/handle-toast.service';
@@ -56,6 +56,7 @@ export class FormulaParenComponent implements OnInit {
       message: this.translatePipe.transform('paren.toast_message_error')
     }
     this.handleToast.setToastMessage(toast);
+    
     setTimeout(() => {
       this.isMenuOpen = false;
     }, 3000);
@@ -70,10 +71,9 @@ export class FormulaParenComponent implements OnInit {
       message: this.translatePipe.transform('paren.toast_message_error')
     }
     this.handleToast.setToastMessage(toast);
+    
     setTimeout(() => {
       this.isMenuOpen = false;
     }, 3000);
   }
-
-
 }

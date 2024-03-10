@@ -1,3 +1,5 @@
+@import '../../../shared-styles/colors';
+
 .alert {
     display: flex;
     flex-direction: column;
@@ -6,13 +8,15 @@
         align-items: center;
         gap: 2rem;
         p {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
+            font-size: 600;
+            color: $errorColor;
         }
     }
     &__examples {
         p, li {
             font-size: 0.9rem;
-            color: #999;
+            color: $neutralDarkColor;
             font-style: italic;
         }
         ul {

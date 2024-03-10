@@ -5,7 +5,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { FormulaParenComponent } from './components/formula-paren/formula-paren.component';
-import { DynamicComponent } from './components/dynamic/dynamic.component';
 import { FormulaOperatorComponent } from './components/formula-operator/formula-operator.component';
 import { FormulaFunctionComponent } from './components/formula-function/formula-function.component';
 import { FormulaElementComponent } from './components/formula-element/formula-element.component';
@@ -28,11 +27,15 @@ import { ToastNotificationComponent } from './components/toast-notification/toas
 import { AlertNotificationComponent } from './components/alert-notification/alert-notification.component';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
+import { LOCALE_ID } from '@angular/core';
+import localeEs from '@angular/common/locales/es';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localeEs, 'es');
+
 @NgModule({
   declarations: [
     AppComponent,
     FormulaParenComponent,
-    DynamicComponent,
     FormulaOperatorComponent,
     FormulaFunctionComponent,
     FormulaElementComponent,
@@ -65,7 +68,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
   ],
   providers: [
     HttpClientModule, 
-    TranslatePipe
+    TranslatePipe,
+    {provide: LOCALE_ID, useValue: 'es'}
   ],
   bootstrap: [AppComponent]
 })

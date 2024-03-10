@@ -1,6 +1,6 @@
-// CORPORATIVES COLORS
-$main-color: #002841;
-$secondary-color: #35abc6;
+$mainColor: #64748B;
+$secondaryColor: #35abc6;
+
 $tertiary-color: #0546461a;
 $complementary-color: #05464633;
 
@@ -11,17 +11,19 @@ $elementBackground: #ffedef;
 $elementBorder: #f1dbde;
 $symbolBackground: #e6fff9;
 $symbolBorder: #c7f3e8;
+$functionBlockBackground: #f8deff;
+$functionBlockBorder: #e390ee;
+$functionBlockLabel: #9f58a8;
 
-// GENERAL COLORS
-$black-color: #000000;
+$toastBackgroundSuccess: #8fdb8f;
+$toastBackgroundError: #f3a6a6;
+
+$blackColor: #2a2a2a;
 $light-green-color: #99cc66;
-$black-color-20perc: #00000033;
-$white-color: #ffffff;
-$pepper-color: #df0024;
-$white-color-30perc: #ffffff4d;
+$whiteColor: #ffffff;
+$errorColor: #be020b;
 
 // NOTIFICATIONS COLORS
-$error-color: #be020b;
 $error-highlight-color: #b804211a;
 $success-color: #058303;
 $success-highlight-color: #0583031a;
@@ -32,10 +34,10 @@ $info-color: #35abc6;
 $info-highlight-color: #35abc633;
 
 // NEUTRAL COLORS
-$neutral-dark-color: #9d9d9d;
+$neutralDarkColor: #9d9d9d;
 $neutral-regular-color: #bdbdbd;
 $neutral-light-color: #e0e0e0;
-$neutral-extra-light-color: #fafafa;
+$neutralExtraLightColor: #fafafa;
 $neutral-light-color-50perc: #e0e0e080;
 
 // HIGHLIGHT ROWS GRID COLORS

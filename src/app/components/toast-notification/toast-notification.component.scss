@@ -1,18 +1,23 @@
+@import '../../../shared-styles/colors';
+
 .toast-notification {
-    min-width: 300px;
-    padding: 1rem 1.5rem;
+    min-width: 18rem;
+    padding: 1rem 0.5rem 1rem 1.5rem;
     border-radius: 6px;
-    color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 1rem;
+    gap: 2rem;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     &.success {
-        background-color: rgb(192, 243, 192);
+        background-color: $toastBackgroundSuccess;
     }
     &.error {
-        background-color: rgb(243, 166, 166);
+        background-color: $toastBackgroundError;
     }
-
+    span {
+        color: $whiteColor;
+        font-size: 1rem;
+        font-weight: 600;
+    }
 }

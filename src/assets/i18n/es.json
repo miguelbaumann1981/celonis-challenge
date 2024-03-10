@@ -1,0 +1,27 @@
+{
+    "header": {
+        "title": "Formulador",
+        "logo_alt": "Logo Celonis"
+    },
+    "main": {
+        "welcome": "¡Bienvenido al formulador de Celonis!",
+        "input_formula": "Inserte fórmula",
+        "input_formula_button": "Parsear y actualizar la vista AST",
+        "json_visualizer_button": "Convertir AST en Fórmula",
+        "converter_title": "Visualizador de Fórmula"
+    },
+    "paren": {
+        "tooltip_button": "Mostrar opciones",
+        "menu_add_element": "Añadir elemento",
+        "menu_delete_block": "Borrar bloque",
+        "toast_message_error": "Esta funcionalidad no está habilitada"
+    },
+    "operator": {
+        "toast_message_success": "Elemento añadido con éxito"
+    },
+    "alert": {
+        "format_not_allowed": "¡Formato de formula no permitido!... Por favor, intente otra fórmula",
+        "tooltip_button": "Ver sugerencias",
+        "examples": "Algunos ejemplos:"
+    }
+}

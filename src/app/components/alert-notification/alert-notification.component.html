@@ -1,21 +1,22 @@
 <div class="alert">
     <div class="alert__main-info">
-        <p class="not-allowed__main">Formato no permitido. Pruebe otra formula</p>
+        <p class="not-allowed__main">{{ 'alert.format_not_allowed' | translate }}</p>
         <button 
             pButton 
             pRipple type="button" 
             icon="pi pi-bell" 
             class="p-button-rounded p-button-warning p-button-outlined"
-            pTooltip="Leer sugerencias"
+            pTooltip="{{ 'alert.tooltip_button' | translate }}"
             (click)="toggleExamples()"
         ></button>
     </div>
 
     <div *ngIf="showExamples" class="alert__examples">
-        <p>Algunos ejemplos:</p>
+        <p>{{ 'alert.examples' | translate }}</p>
         <ul>
             <li>2 + 1</li>
             <li>(4 - 3) / (2 * $a)</li>
+            <li>(6 + 2) / 4</li>
             <li>(4 - SQR($b - 8)) / (2 * $a)</li>
         </ul>
     </div>

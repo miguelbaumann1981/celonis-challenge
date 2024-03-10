@@ -1,5 +1,5 @@
 <div class="toast-notification" [ngClass]="{ 'success': toastNotification.type === 'success', 'error': toastNotification.type === 'error' }">
-    {{ toastNotification.message }}
+    <span>{{ toastNotification.message }}</span>
 
     <button 
         *ngIf="toastNotification.message" 

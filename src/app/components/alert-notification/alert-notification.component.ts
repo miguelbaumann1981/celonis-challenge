@@ -11,8 +11,6 @@ export class AlertNotificationComponent {
 
   constructor() { }
 
-
-
   toggleExamples(): void {
     this.showExamples = !this.showExamples;
   }
