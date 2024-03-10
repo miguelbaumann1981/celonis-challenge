@@ -7,13 +7,23 @@ import { HttpClient } from '@angular/common/http';
 })
 export class OperatorsService {
 
+  public baseUrl: string = 'assets/data';
+
   constructor(private http: HttpClient) { }
 
+  /*
+    ** Method to get all available operators
+  */
   getOperators(): Observable<any> {
-    return this.http.get<any>('assets/data/operators.json');
+    const url = `${this.baseUrl}/operators.json`;
+    return this.http.get<any>(url);
   }
 
+  /*
+    ** Method to get all available type of values
+  */
   getTypeValues(): Observable<any> {
-    return this.http.get<any>('assets/data/type-values.json');
+    const url = `${this.baseUrl}/type-values.json`;
+    return this.http.get<any>(url);
   }
 }

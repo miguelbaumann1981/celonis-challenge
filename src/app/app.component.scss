@@ -5,6 +5,7 @@
 .app-container {
     width: 100%;
     position: relative;
+    
     &__header {
         background-color: #fff;
         position: fixed;
@@ -12,7 +13,7 @@
         left: 0;
         width: 100%;
         padding: 1rem $paddingContainer;
-        height: 6rem;
+        height: $heightHeaderDesktop;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -28,6 +29,7 @@
             span {
                 font-size: 2.5rem;
                 font-weight: 700;
+                color: $secondary-color;
             }
         }
         &--settings {
@@ -41,7 +43,7 @@
         position: absolute;
         top: 96px;
         left: 0;
-        height: calc(100vh - 6rem);
+        height: calc(100vh - $heightHeaderDesktop);
         background-color: $neutral-extra-light-color;
         display: flex;
         flex-direction: column;
@@ -50,6 +52,7 @@
             font-size: 2rem;
             color: $main-color;
             margin-bottom: 1.5rem;
+            font-weight: 600;
         }
         &--visualizer {
             display: flex;
@@ -105,5 +108,54 @@
         position: absolute;
         top: 120px;
         right: 40px;
+    }
+}
+
+
+@media(max-width: $size-xxl) {
+    .app-container {
+        &__header {
+            padding: 1rem $paddingContainerXxl;
+        }
+        &__content {
+            padding: 1rem $paddingContainerXxl 2rem;
+        }
+    }
+}
+
+@media(max-width: $size-lg) {
+    .app-container {
+        &__header {
+            padding: 1rem $paddingContainerLg;
+        }
+        &__content {
+            padding: 1rem $paddingContainerLg 2rem;
+            &--visualizer {
+                flex-direction: column;
+                &-block {
+                    width: 100%;
+                    align-items: flex-start;
+                    .p-float-label {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media(max-width: $size-md) {
+    .app-container {
+        &__header {
+            padding: 1rem $paddingContainerMd;
+            &--title {
+                img {
+                    width: 1.5rem;
+                }
+            }
+        }
+        &__content {
+            padding: 1rem $paddingContainerMd 2rem;
+        }
     }
 }

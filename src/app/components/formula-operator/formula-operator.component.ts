@@ -1,6 +1,7 @@
 import { Component, ComponentFactoryResolver, Input, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { HandleFormulaService } from 'src/app/services/handle-formula.service';
 import { Subject, takeUntil } from 'rxjs';
+import { SideBlockOperator } from 'src/app/interfaces/SideBlockOperator';
 
 @Component({
   selector: 'formula-operator',
@@ -13,45 +14,41 @@ export class FormulaOperatorComponent implements OnInit, OnDestroy {
   @Input() public operatorType: string = '';
   @Input() public leftSide: any;
   @Input() public rightSide: any;
-  @Input() public formula: string = '';
 
   @ViewChild('dynamicComponentContainer', { read: ViewContainerRef }) 
   dynamicComponentContainer!: ViewContainerRef;
 
   public leftExpression: any;
   public rightExpression: any;
-  public leftSingleElement: any = {
+  public leftSingleElement: SideBlockOperator = {
     type: '',
     value: '',
     arguments: []
   };
-  public rightSingleElement: any = {
+  public rightSingleElement: SideBlockOperator = {
     type: '',
     value: '',
     arguments: []
   };
-  public editedValue: any;
-  public formulaBlock: string = '';
   public formulaBlockArray: string[] = [];
-  public idParenLeft: number = 0;
-  public idParenRight: number = 0;
+  public parenLeftId: number = Math.floor(Math.random() * 1000);
+  public parenRightId: number = Math.floor(Math.random() * 1000);
   public formulaBuiltArray: string[] = [];
-  public isFormatBanned: boolean = false;
 
-  constructor( 
-    private handleFormula: HandleFormulaService,
-   ) {
-     
-     }
+  constructor(private handleFormula: HandleFormulaService) {}
 
   ngOnInit(): void {
+    this.assignmentValuesLeftBlock();
+    this.assignmentValuesRightBlock();
 
-    this.handleFormula.getFormula().pipe(takeUntil(this.destroy$)).subscribe(formula => {
-      console.log('Formula en element', formula);
-    });
-    
-    this.idParenLeft = Math.floor(Math.random() * 1000);
-    this.idParenRight = Math.floor(Math.random() * 1000);
+    const block = this.leftSingleElement.value + ' ' + this.operatorType + ' ' + this.rightSingleElement.value;
+    this.formulaBlockArray.push(block);
+  }
+
+  /*
+    ** Method to assing values to the left block
+  */
+  public assignmentValuesLeftBlock(): void {
     if (this.leftSide?.expression) {
       this.leftExpression = this.leftSide?.expression;
     } else {
@@ -61,7 +58,12 @@ export class FormulaOperatorComponent implements OnInit, OnDestroy {
         arguments: this.leftSide?.type === 'FUNCTION' ? this.leftSide?.arguments : [] 
       };
     }
+  }
 
+  /*
+    ** Method to assing values to the right block
+  */
+  public assignmentValuesRightBlock(): void {
     if (this.rightSide?.expression) {
       this.rightExpression = this.rightSide?.expression;
     } else {
@@ -71,30 +73,24 @@ export class FormulaOperatorComponent implements OnInit, OnDestroy {
         arguments: this.rightSide?.type === 'FUNCTION' ? this.rightSide?.arguments : []
       };
     }
-
-    this.formulaBlock = this.leftSingleElement.value + ' ' + this.operatorType + ' ' + this.rightSingleElement.value;
-    this.formulaBlockArray.push(this.formulaBlock);
-    // console.log('formulaBlockArray', this.formulaBlockArray);
-
   }
 
+  /*
+    ** Method to submit the element value
+  */
   public onElementEvent(element: string): void {
-    console.log('element: ', element);
     this.handleFormula.setSingleElement(element);
   }
 
-  onSelect(event: any): void {
-    console.log(event);
-  }
-
-  onSymbolEvent(symbol: string): void {
-    console.log('symbol: ', symbol);
+  /*
+    ** Method to submit the symbol value
+  */
+  public onSymbolEvent(symbol: string): void {
     this.handleFormula.setSingleElement(symbol);
   }
 
   ngOnDestroy(): void {
     this.destroy$.next(undefined);
-    
   }
 
 }

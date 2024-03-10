@@ -1,45 +1,86 @@
 <div class="app-container">
-
+  <!-- #region HEADER -->
   <header class="app-container__header">
+    <!-- #region LOGO & TITLE -->
     <div class="app-container__header--title">
-      <img src="../assets/img/celonis-logo.png" alt="Logo Celonis">
-      <span>Formulizer</span>
+      <img src="../assets/img/celonis-logo.png" alt="{{ 'header.logo_alt' | translate }}">
+      <span>{{ 'header.title' | translate }}</span>
     </div>
+    <!-- #endregion -->
+
+    <!-- #region LANGUAGES -->
     <div class="app-container__header--settings">Flags</div>
   </header>
+  <!-- #endregion -->
 
+  <!-- ------------------------------------------- -->
+  <!-- #region CONTENT -->
   <main class="app-container__content">
-    <h1 class="app-container__content--welcome">Welcome to the formulizer!</h1>
+    <!-- #region WELCOME -->
+    <h1 class="app-container__content--welcome">{{ 'main.welcome' | translate }}</h1>
+    <!-- #endregion -->
+
+    <!-- #region VISUALIZER -->
     <section class="app-container__content--visualizer">
+      <!-- #region INPUT FORMULA -->
       <div class="app-container__content--visualizer-block">
-      
         <span class="p-float-label">
-          <textarea inputId="textarea" pInputTextarea cols="100" rows="8" [(ngModel)]="formula"></textarea>
-          <label for="textarea">Input formula</label>
+          <textarea 
+            inputId="textarea" 
+            pInputTextarea 
+            cols="100" 
+            rows="8" 
+            [(ngModel)]="formula"
+          ></textarea>
+          <label for="textarea">{{ 'main.input_formula' | translate }}</label>
         </span>
         
-        <button pButton pRipple type="button" label="Parse and update AST View" class="p-button-raised p-button-info" (click)="updateAstView()"></button>
+        <button 
+          pButton 
+          pRipple 
+          type="button" 
+          label="{{ 'main.input_formula_button' | translate }}" 
+          class="p-button-raised p-button-success" 
+          (click)="updateAstView()"
+        ></button>
       </div>
-      
+      <!-- #endregion -->
+
+      <!-- #region JSON VISUALIZER -->
       <div *ngIf="syntaxTreeJson" class="app-container__content--visualizer-block">
         <pre>{{syntaxTreeJson}}</pre>
-        <button pButton pRipple type="button" label="Convert AST to Formula" class="p-button-raised p-button-info" (click)="convertAstToFormula()"></button>
+        <button 
+          pButton 
+          pRipple 
+          type="button" 
+          label="{{ 'main.json_visualizer_button' | translate }}" 
+          class="p-button-raised p-button-success" 
+          (click)="convertAstToFormula()"
+        ></button>
       </div>
+      <!-- #endregion -->
     </section>
+    <!-- #endregion -->
     
+    <!-- #region CONVERTER -->
     <section class="app-container__content--converter">
-      <h3 class="app-container__content--converter-title">Visualizer to Formula</h3>
+      <h3 class="app-container__content--converter-title">{{ 'main.converter_title' | translate }}</h3>
       <div class="app-container__content--converter-view">
           <ng-template #dynamicComponentContainer></ng-template>
         </div>
     </section>
+    <!-- #endregion -->
     
   </main>
+  <!-- #endregion -->
 
+  <!-- ------------------------------------------- -->
+  <!-- #region TOAST NOTIFICATION -->
   <div *ngIf="toastNotification.message" class="app-container__toast">
     <toast-notification
       [toastNotification]="toastNotification"
       (closeToastEvent)="closeToast()"
     ></toast-notification>
   </div>
+  <!-- #endregion -->
 </div>

@@ -1,22 +1,24 @@
-<span class="formula-paren">
-    <span class="formula-paren__block" *ngIf="expression">
-        <formula-operator
-            [operatorType]="expression?.type"
-            [leftSide]="expression?.left"
-            [rightSide]="expression?.right"
-        ></formula-operator>
+<span *ngIf="expression" class="formula-paren">
+    <!-- #region BLOCK OPERATION -->
+    <formula-operator
+        [operatorType]="expression?.type"
+        [leftSide]="expression?.left"
+        [rightSide]="expression?.right"
+    ></formula-operator>
+    <!-- #endregion -->
 
-        <span class="formula-paren__block--buttons">
-            <p-menu *ngIf="isMenuOpen" [model]="items"></p-menu>
-            <button 
-                class="formula-paren__block--buttons-menu" 
-                pTooltip="Show options" 
-                tooltipPosition="top"
-                (click)="showMenu(id)">
-                <span>...</span>
-            </button>
-        </span>
+    <!-- #region BLOCK BUTTONS -->
+    <span class="formula-paren__buttons">
+        <p-menu *ngIf="isMenuOpen" [model]="items"></p-menu>
+        <button 
+            class="formula-paren__buttons--menu" 
+            pTooltip="{{ 'paren.tooltip_button' | translate }}" 
+            tooltipPosition="top"
+            (click)="showMenu(id)">
+            <span>...</span>
+        </button>
     </span>
+    <!-- #endregion -->
 </span>
 
 

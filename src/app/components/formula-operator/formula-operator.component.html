@@ -1,9 +1,16 @@
+<!-- #region ALERT NOTIFICATION -->
 <alert-notification *ngIf="leftSingleElement.value === undefined || rightSingleElement.value === undefined; else allowedFormat"></alert-notification>
+<!-- #endregion -->
 
+<!-- ------------------------------------------- -->
+<!-- #region BLOCK OPERATION -->
 <ng-template #allowedFormat>
     <div class="formula-operator">
-        <span  class="formula-operator__left" *ngIf="leftSide?.type === 'PAREN' && leftSide?.expression; else noParenLeft">
-            <formula-paren [id]="idParenLeft" [expression]="leftExpression"></formula-paren>
+        <!-- #region LEFT BLOCK -->
+        <span 
+            *ngIf="leftSide?.type === 'PAREN' && leftSide?.expression; else noParenLeft"
+            class="formula-operator__left">
+                <formula-paren [id]="parenLeftId" [expression]="leftExpression"></formula-paren>
         </span>
         
         <ng-template #noParenLeft>
@@ -14,18 +21,22 @@
                 (submitElementEvent)="onElementEvent($event)"
             ></formula-element>
         </ng-template>
+        <!-- #endregion -->
         
-        
+        <!-- #region SYMBOL BLOCK -->
         <span class="formula-operator__symbol">
             <formula-symbol
                 [operatorType]="operatorType"
                 (submitSymbolEvent)="onSymbolEvent($event)"
             ></formula-symbol>
         </span>
-    
+        <!-- #endregion -->
         
-        <span class="formula-operator__right" *ngIf="rightSide?.type === 'PAREN' && rightSide?.expression; else noParenRight">
-            <formula-paren [id]="idParenRight" [expression]="rightExpression"></formula-paren>
+        <!-- #region RIGHT BLOCK -->
+        <span
+            *ngIf="rightSide?.type === 'PAREN' && rightSide?.expression; else noParenRight" 
+            class="formula-operator__right">
+                <formula-paren [id]="parenRightId" [expression]="rightExpression"></formula-paren>
         </span>
         
         <ng-template #noParenRight>
@@ -36,8 +47,10 @@
                 (submitElementEvent)="onElementEvent($event)"
             ></formula-element>
         </ng-template>
+        <!-- #endregion -->
     </div>
 </ng-template>
+<!-- #endregion -->
 
 
 

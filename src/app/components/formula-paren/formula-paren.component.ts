@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MessageService } from 'primeng/api';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
 import { ToastNotification } from 'src/app/interfaces/ToastNotification';
 import { HandleToastService } from 'src/app/services/handle-toast.service';
@@ -8,7 +8,6 @@ import { HandleToastService } from 'src/app/services/handle-toast.service';
   selector: 'formula-paren',
   templateUrl: './formula-paren.component.html',
   styleUrls: ['./formula-paren.component.scss'],
-  providers: [MessageService]
 })
 export class FormulaParenComponent implements OnInit {
 
@@ -16,42 +15,59 @@ export class FormulaParenComponent implements OnInit {
   @Input() public type: string = '';
   @Input() public expression: any;
 
-  items: MenuItem[] = [];
+  public items: MenuItem[] = [];
   public isMenuOpen: boolean = false;
 
   constructor(
     private handleToast: HandleToastService,
-    private messageService: MessageService, 
+    private translatePipe: TranslatePipe
   ) { }
 
   ngOnInit(): void {
-    console.log(this.id);
-
     this.items = [
       {
-        label: 'New', 
+        label: this.translatePipe.transform('paren.menu_add_element'), 
         icon: 'pi pi-fw pi-plus', 
-        command: () => {
-          this.showToast();
-        }
+        command: () => this.addElement()
       },
-      {label: 'Open', icon: 'pi pi-fw pi-download'},
-      {label: 'Undo', icon: 'pi pi-fw pi-refresh'}
+      { 
+        label: this.translatePipe.transform('paren.menu_delete_block'), 
+        icon: 'pi pi-fw pi-times',
+        command: () => this.deleteBlock()
+      }
     ];
   }
 
+  /*
+    ** Method to toggle the menu button
+  */
   showMenu(_id: number): void {
     if (this.id === _id) {
       this.isMenuOpen = !this.isMenuOpen;
     } 
   }
 
-
-
-  showToast() {
+  /*
+    ** Method to show toast message
+  */
+  public addElement(): void {
     const toast: ToastNotification = {
       type: 'error',
-      message: 'Sorry....'
+      message: this.translatePipe.transform('paren.toast_message_error')
+    }
+    this.handleToast.setToastMessage(toast);
+    setTimeout(() => {
+      this.isMenuOpen = false;
+    }, 3000);
+  }
+
+  /*
+    ** Method to show toast message
+  */
+  public deleteBlock(): void {
+    const toast: ToastNotification = {
+      type: 'error',
+      message: this.translatePipe.transform('paren.toast_message_error')
     }
     this.handleToast.setToastMessage(toast);
     setTimeout(() => {

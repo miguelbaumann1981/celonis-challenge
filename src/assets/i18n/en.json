@@ -1,0 +1,19 @@
+{
+    "header": {
+        "title": "Formulizer",
+        "logo_alt": "Logo Celonis"
+    },
+    "main": {
+        "welcome": "Welcome to the Celonis formulizer!",
+        "input_formula": "Input formula",
+        "input_formula_button": "Parse and update AST View",
+        "json_visualizer_button": "Convert AST to Formula",
+        "converter_title": "Visualizer to Formula"
+    },
+    "paren": {
+        "tooltip_button": "Show options",
+        "menu_add_element": "Add element",
+        "menu_delete_block": "Delete block",
+        "toast_message_error": "This functionality is not enabled"
+    }
+}

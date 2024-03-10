@@ -12,8 +12,10 @@ import { FormulaElementComponent } from './components/formula-element/formula-el
 import { InputTextModule } from 'primeng/inputtext';
 import { TreeSelectModule } from 'primeng/treeselect';
 import {
+  HttpClient,
   HttpClientModule,
 } from '@angular/common/http';
+import { TranslateLoader, TranslateModule, TranslatePipe } from '@ngx-translate/core';
 import { FormulaSymbolComponent } from './components/formula-symbol/formula-symbol.component';
 import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
@@ -24,6 +26,7 @@ import { MenuModule } from 'primeng/menu';
 import {RippleModule} from 'primeng/ripple';
 import { ToastNotificationComponent } from './components/toast-notification/toast-notification.component';
 import { AlertNotificationComponent } from './components/alert-notification/alert-notification.component';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 @NgModule({
   declarations: [
@@ -40,6 +43,14 @@ import { AlertNotificationComponent } from './components/alert-notification/aler
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    TranslateModule.forRoot({
+      defaultLanguage: 'en',
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
     FormsModule,
     InputTextModule,
     TreeSelectModule,
@@ -52,7 +63,14 @@ import { AlertNotificationComponent } from './components/alert-notification/aler
     MenuModule,
     RippleModule
   ],
-  providers: [HttpClientModule],
+  providers: [
+    HttpClientModule, 
+    TranslatePipe
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http);
+}

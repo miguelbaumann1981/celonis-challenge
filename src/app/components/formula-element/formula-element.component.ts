@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
+import { SelectItem } from 'src/app/interfaces/SelectItem';
 import { OperatorsService } from 'src/app/services/operators.service';
 
 
@@ -8,44 +9,52 @@ import { OperatorsService } from 'src/app/services/operators.service';
   templateUrl: './formula-element.component.html',
   styleUrls: ['./formula-element.component.scss']
 })
-export class FormulaElementComponent implements OnInit {
+export class FormulaElementComponent implements OnInit, OnDestroy {
   private readonly destroy$ = new Subject<void>();
 
   @Input() public id: number = 0;
-  @Input() public type: string = '';
+  @Input() public type: string | undefined = '';
   @Input() public value: any;
   @Input() public arguments: any[] = [];
-  @Input() public formula: string = '';
 
-  @Output() submitElementEvent: EventEmitter<string> = new EventEmitter<string>();
-  @Output() submitSymbolEvent: EventEmitter<string> = new EventEmitter<string>();
+  @Output() public submitElementEvent: EventEmitter<string> = new EventEmitter<string>();
+  @Output() public submitSymbolEvent: EventEmitter<string> = new EventEmitter<string>();
 
-  public operation: any[] = [];
-  public elementEdited: any;
-  public elemValue: any;
   public functionId: number = Math.floor(Math.random() * 1000);
-  public valueTypes: any[] = [];
-  public selectedValueType: any[] = [];
+  public valueTypes: SelectItem[] = [];
+  public selectedValueType: SelectItem[] = [];
 
-  constructor( private operatorsService: OperatorsService ) { }
+  constructor(private operatorsService: OperatorsService) { }
 
   ngOnInit(): void {
-    console.log(this.value);
+    this.getValueTypesService();
+  }
+
+  /*
+    ** Method to get the value types from service
+  */
+  private getValueTypesService(): void {
     this.operatorsService.getTypeValues().pipe(takeUntil(this.destroy$)).subscribe((files) => {
       this.valueTypes = files.data;
       this.valueTypes.map((value) => {
         if (this.type === value.key) {
           this.selectedValueType.push(value);
         }
-      })
+      });
     });
   }
 
+  /*
+    ** Method to submit the element changed
+  */
   public onChange(event: any) {
     this.submitElementEvent.emit(event.target.value);
   }
 
-  onSelect(event: any): void {
+  /*
+    ** Method to submit the symbol changed
+  */
+  public onSelect(event: any): void {
     this.submitSymbolEvent.emit(event.node.label);
   }
 

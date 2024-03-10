@@ -2,12 +2,12 @@ import { Component, ComponentFactoryResolver, OnInit, Type, ViewChild, ViewConta
 
 // @ts-ignore
 import * as Parser from './parser/formula-parser.js';
-import { DynamicComponent } from './components/dynamic/dynamic.component';
 import { FormulaOperatorComponent } from './components/formula-operator/formula-operator.component';
 import { HandleFormulaService } from './services/handle-formula.service';
 import { Subject, takeUntil } from 'rxjs';
 import { HandleToastService } from './services/handle-toast.service';
 import { ToastNotification } from './interfaces/ToastNotification.js';
+import { TranslateService } from '@ngx-translate/core';
 const parse = Parser.parse;
 
 type operator = 'ADDITION' | 'SUBTRACTION' | 'MULTIPLICATION' | 'DIVISION';
@@ -25,11 +25,9 @@ export class AppComponent implements OnInit {
   // formula: string = "SQRT (SQR($b) - 4 * $a)";
   // formula: string = "($b + SQRT (SQR($b) - 4 * $a)) / (2 * $a)";
   // formula: string = "(4 - 3) / (2 * $a)";
-  formula: string = "(4 - SQR($b - 8)) / (2 * $a)";
-  visualizerOutput: string = "";
-  syntaxTree: any;
-  syntaxTreeJson: string = "";
-  public showDynamicComponent: boolean = false;
+  public formula: string = "(4 - SQR($b - 8)) / (2 * $a)";
+  public syntaxTree: any;
+  public syntaxTreeJson: string = "";
   public formulaBuiltArray: string[] = [];
   public toastNotification: ToastNotification = {};
  
@@ -37,80 +35,77 @@ export class AppComponent implements OnInit {
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
     private handleFormula: HandleFormulaService ,
-    private handleToast: HandleToastService
-  ) {}
+    private handleToast: HandleToastService,
+    translate: TranslateService
+  ) {
+      translate.setDefaultLang('en');
+      translate.use('en');
+    }
 
   ngOnInit(): void {
+    this.handleFormulaService();
+    this.handleToastService();
+  }
+
+  /*
+    ** Method to evaluate if formula has been modified
+  */
+  private handleFormulaService(): void {
     this.handleFormula.getSingleElement().pipe(takeUntil(this.destroy$)).subscribe(element => {
       if (element) {
         this.formula = '';
         this.formulaBuiltArray.push(element);
-        // console.log('Elements en app', this.formulaBuiltArray);
-        // const transform = this.formulaBuiltArray.toString().replace(',', ' ');
-        // console.log(transform);
-        // this.formula = transform;
+        this.formula = this.formulaBuiltArray.toString().replace(/,/g, ' ');
       }
     });
+  }
 
+  /*
+    ** Method to evaluate if toast has been fired
+  */
+  private handleToastService(): void {
     this.handleToast.getToastMessage().pipe(takeUntil(this.destroy$)).subscribe(toast => {
       if (toast) {
         this.toastNotification = toast;
-        // setTimeout(() => {
-        //   this.toast = '';
-        // }, 3000);
       }
-    })
+    });
   }
 
-  addComponent(message: string) {
-    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(DynamicComponent);
-    const componentRef = componentFactory.create(this.dynamicComponentContainer.injector);
-    componentRef.instance.message = message;
-    this.dynamicComponentContainer.insert(componentRef.hostView);
-  }
-
-  addOperatorComponent(operatorType: string, left: any, right: any, formula: string) {
+  /*
+    ** Method to add operation component
+  */
+  public addOperatorComponent(operatorType: string, left: any, right: any) {
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(FormulaOperatorComponent);
     const componentRef = componentFactory.create(this.dynamicComponentContainer?.injector);
     componentRef.instance.operatorType = operatorType;
     componentRef.instance.leftSide = left;
     componentRef.instance.rightSide = right;
-    componentRef.instance.formula = formula;
     this.dynamicComponentContainer.insert(componentRef.hostView);
   }
 
-
-  updateAstView() {
-    console.log('creating ast view...', this.formula);
+  /*
+    ** Method to update syntaxTree and show it in view
+  */
+  public updateAstView() {
     this.handleFormula.setFormula(this.formula);
     this.dynamicComponentContainer.clear();
-
     this.syntaxTree = parse(this.formula);
-    console.log('The ast is: ', this.syntaxTree);
     this.syntaxTreeJson = JSON.stringify(this.syntaxTree, null, 2);
   }
 
-  convertAstToFormula() {
-    console.log('converting ast to string...');
-    // this.visualizerOutput = "TO BE IMPLEMENTED";
+  /*
+    ** Method to convert syntaxTree and show it in view
+  */
+  public convertAstToFormula() {
     if (this.syntaxTree) {
-      this.addOperatorComponent(
-        this.syntaxTree?.type, 
-        this.syntaxTree?.left, 
-        this.syntaxTree?.right,
-        this.formula);
+      this.addOperatorComponent(this.syntaxTree?.type, this.syntaxTree?.left, this.syntaxTree?.right);
     }
   }
 
-  onSubmit(): void {
-    this.formula = '';
-    console.log('Elements en app', this.formulaBuiltArray);
-      const transform = this.formulaBuiltArray.toString();
-      console.log(transform);
-    this.formula = transform.replace(/,/g, ' ');
-  }
-
-  closeToast(): void {
+  /*
+    ** Method to close the toast notification
+  */
+  public closeToast(): void {
     this.toastNotification = {};
   }
 

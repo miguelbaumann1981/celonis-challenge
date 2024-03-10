@@ -1,7 +1,11 @@
-
+<!-- #region NO FUNCTION CASE -->
 <ng-container *ngIf="type !== 'FUNCTION'; else typeFunction">
     <span class="formula-element">
-        <input [id]="id" class="formula-element__input" pInputText [value]="value" (change)="onChange($event)" />
+        <input 
+            [id]="id" 
+            class="formula-element__input" 
+            pInputText [value]="value" 
+            (change)="onChange($event)" />
         <p-treeSelect
             class="formula-element-symbol"
             [(ngModel)]="selectedValueType" 
@@ -10,16 +14,16 @@
         ></p-treeSelect>
     </span>
 </ng-container>
+<!-- #endregion -->
 
+<!-- #region FUNCTION CASE -->
 <ng-template #typeFunction>
-    <!-- <span class="formula-element">
-        {{ value }}
-    </span> -->
     <formula-function
         [id]="functionId"
         [arguments]="arguments"
         [functionName]="value"
     ></formula-function>
 </ng-template>
+<!-- #endregion -->
 
 

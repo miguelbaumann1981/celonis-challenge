@@ -1,38 +1,35 @@
-
+@import '../../../shared-styles/colors';
 
 .formula-paren {
-    padding: 5px;
-    &__block {
-        position: relative;
-        width: 100%;
-        display: inline-flex;
-        transition: 0.5s all ease;
-        &--buttons {
-            position: absolute;
-            top: -17px;
-            right: -8px;
-            z-index: 1;
+    padding: 0.3rem;
+    position: relative;
+    width: 100%;
+    display: inline-flex;
+    &__buttons {
+        position: absolute;
+        top: -17px;
+        right: -8px;
+        z-index: 1;
+        display: flex;
+        gap: 0.25rem;
+        &--menu {
+            border-radius: 50%;
+            height: 1.5rem;
+            background-color: $parenBlockBackground;
+            border: 1px solid $parenBlockBorder;
+            width: 1.5rem;
+            cursor: pointer;
             display: flex;
-            gap: 4px;
-            &-menu {
-                border-radius: 50%;
-                height: 1.5rem;
-                background-color: #fffaec;
-                border: 1px solid rgb(247, 233, 197);
-                width: 1.5rem;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            padding-bottom: 7px;
+            span {
+                color: $parenBlockText;
                 font-size: 1rem;
                 font-weight: 700;
-                cursor: pointer;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                text-align: center;
-                padding-bottom: 7px;
-                span {
-                    color: #d1af57;
-                    font-weight: 700;
-                }
             }
         }
     }
+ 
 }
