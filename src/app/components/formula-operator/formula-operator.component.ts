@@ -10,7 +10,8 @@ import { Type } from 'src/app/enums/Operators';
 @Component({
   selector: 'formula-operator',
   templateUrl: './formula-operator.component.html',
-  styleUrls: ['./formula-operator.component.scss']
+  styleUrls: ['./formula-operator.component.scss'],
+  providers: [TranslatePipe]
 })
 export class FormulaOperatorComponent implements OnInit, OnDestroy {
   private readonly destroy$ = new Subject<void>();

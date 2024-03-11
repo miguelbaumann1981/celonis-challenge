@@ -7,7 +7,8 @@ import { HandleToastService } from 'src/app/services/handle-toast.service';
 @Component({
   selector: 'formula-function',
   templateUrl: './formula-function.component.html',
-  styleUrls: ['./formula-function.component.scss']
+  styleUrls: ['./formula-function.component.scss'],
+  providers: [TranslatePipe]
 })
 export class FormulaFunctionComponent implements OnInit {
 

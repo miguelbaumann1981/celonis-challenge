@@ -8,6 +8,7 @@ import { HandleToastService } from 'src/app/services/handle-toast.service';
   selector: 'formula-paren',
   templateUrl: './formula-paren.component.html',
   styleUrls: ['./formula-paren.component.scss'],
+  providers: [TranslatePipe]
 })
 export class FormulaParenComponent implements OnInit {
 
@@ -54,7 +55,7 @@ export class FormulaParenComponent implements OnInit {
     const toast: ToastNotification = {
       type: 'error',
       message: this.translatePipe.transform('paren.toast_message_error')
-    }
+    };
     this.handleToast.setToastMessage(toast);
     
     setTimeout(() => {
