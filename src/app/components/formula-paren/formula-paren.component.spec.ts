@@ -60,7 +60,7 @@ describe('FormulaParenComponent', () => {
     expect(component.isMenuOpen).toBeFalsy();
   });
 
-  it('ngOnInit lifecycle inits menu items', () => {
+  it('ngOnInit inits menu items', () => {
     component.ngOnInit();
     expect(component.items.length).toBe(2);
   });

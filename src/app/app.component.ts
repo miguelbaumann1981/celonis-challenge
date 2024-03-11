@@ -1,4 +1,4 @@
-import { Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ComponentFactoryResolver, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 
 // @ts-ignore
 import * as Parser from './parser/formula-parser.js';
@@ -16,7 +16,7 @@ const parse = Parser.parse;
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   private readonly destroy$ = new Subject<void>();
   
   @ViewChild('dynamicComponentContainer', { read: ViewContainerRef }) 
@@ -129,6 +129,10 @@ export class AppComponent implements OnInit {
     if (this.selectedLanguage === 'spain') {
       this.translate.use('es');
     }
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next(undefined);
   }
 
 }

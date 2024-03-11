@@ -3,7 +3,10 @@ import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
-  beforeEach(async(() => {
+
+  let component: AppComponent;
+
+  beforeEach((() => {
     TestBed.configureTestingModule({
       declarations: [
         AppComponent
@@ -29,4 +32,10 @@ describe('AppComponent', () => {
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('h1').textContent).toContain('Welcome to app!');
   }));
+
+  it('ngOnDestroy submits a subject as undefined', () => {
+    const spy = spyOn(component['destroy$'], 'next');
+    component.ngOnDestroy();
+    expect(spy).toHaveBeenCalledWith(undefined);
+  });
 });

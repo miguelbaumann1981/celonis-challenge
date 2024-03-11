@@ -1,6 +1,5 @@
-import { Component, ComponentFactoryResolver, Input, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { HandleFormulaService } from 'src/app/services/handle-formula.service';
-import { Subject, takeUntil } from 'rxjs';
 import { SideBlockOperator } from 'src/app/interfaces/SideBlockOperator';
 import { HandleToastService } from 'src/app/services/handle-toast.service';
 import { ToastNotification } from 'src/app/interfaces/ToastNotification';
@@ -13,15 +12,11 @@ import { Type } from 'src/app/enums/Operators';
   styleUrls: ['./formula-operator.component.scss'],
   providers: [TranslatePipe]
 })
-export class FormulaOperatorComponent implements OnInit, OnDestroy {
-  private readonly destroy$ = new Subject<void>();
+export class FormulaOperatorComponent implements OnInit {
 
   @Input() public operatorType: string = '';
   @Input() public leftSide: any;
   @Input() public rightSide: any;
-
-  @ViewChild('dynamicComponentContainer', { read: ViewContainerRef }) 
-  dynamicComponentContainer!: ViewContainerRef;
 
   public leftExpression: any;
   public rightExpression: any;
@@ -126,10 +121,6 @@ export class FormulaOperatorComponent implements OnInit, OnDestroy {
       message: this.translatePipe.transform('operator.toast_message_success')
     }
     this.handleToast.setToastMessage(toast);
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next(undefined);
   }
 
 }

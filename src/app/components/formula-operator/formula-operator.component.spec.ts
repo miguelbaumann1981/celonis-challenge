@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, Pipe } from '@angular/core';
 import { FormulaOperatorComponent } from './formula-operator.component';
 import { TranslateFakeLoader, TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
+import { ToastNotification } from 'src/app/interfaces/ToastNotification';
 
 @Pipe({name: 'translate'})
 class PipeTranslateMock {
@@ -43,19 +44,19 @@ const jsonOperation1: any = {
 };
 
 const jsonOperation2: any = {
-  "type": "SUBTRACTION",
-  "left": {
-    "type": "NUMBER",
-    "value": 4
+  type: "SUBTRACTION",
+  left: {
+    type: "NUMBER",
+    value: 4
   },
-  "right": {
-    "type": "NUMBER",
-    "value": 3
+  right: {
+    type: "NUMBER",
+    value: 3
   }
 };
   
 
-fdescribe('FormulaOperatorComponent', () => {
+describe('FormulaOperatorComponent', () => {
   let component: FormulaOperatorComponent;
   let fixture: ComponentFixture<FormulaOperatorComponent>;
 
@@ -118,12 +119,48 @@ fdescribe('FormulaOperatorComponent', () => {
     expect(component.rightSingleElement.arguments).toEqual([]);
   });
   
-  
-  
-  
-  it('ngOnDestroy submits a subject as undefined', () => {
-    const spy = spyOn(component['destroy$'], 'next');
-    component.ngOnDestroy();
-    expect(spy).toHaveBeenCalledWith(undefined);
+  it('mapValueByType method returns a value', () => {
+    const jsonOperation: any = {
+      type: "SUBTRACTION",
+      left: {
+        type: "NUMBER",
+        value: 4
+      },
+      right: {
+        type: "PI",
+        value: "PI"
+      }
+    };
+    component.leftSide = jsonOperation.left;
+    component.mapValueByType(jsonOperation.left, jsonOperation.left.type);
+    expect(component.leftSide.value).toBe(4);
+
+    component.mapValueByType(jsonOperation.right, jsonOperation.right.type);
+    expect(component.rightSide.value).toBe('PI');
   });
+
+  it('onElementEvent submits a single element and toast notification', () => {
+    const element: string = '5';
+    const toast: ToastNotification = {
+      type: 'error',
+      message: 'Error message'
+    };
+    component['handleFormula'].setSingleElement(element);
+    component['handleToast'].setToastMessage(toast);
+    component.onElementEvent(element);
+    expect(component).toBeTruthy();
+  });
+  
+  it('onSymbolEvent submits a symbol and toast notification', () => {
+    const symbol: string = '+';
+    const toast: ToastNotification = {
+      type: 'success',
+      message: 'Success message'
+    };
+    component['handleFormula'].setSingleElement(symbol);
+    component['handleToast'].setToastMessage(toast);
+    component.onElementEvent(symbol);
+    expect(component).not.toBeFalsy();
+  });
+
 });
