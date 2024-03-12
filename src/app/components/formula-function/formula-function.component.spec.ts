@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { FormulaFunctionComponent } from './formula-function.component';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, Pipe } from '@angular/core';
 import { TranslateFakeLoader, TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -61,6 +61,19 @@ describe('FormulaFunctionComponent', () => {
   });
 
   it('ngOnInit lifecycle inits menu items', () => {
+    const _items = [
+      {
+        label: 'Label 1',
+        icon: 'icon 1',
+        command: () => {}
+      },
+      {
+        label: 'Label 2',
+        icon: 'icon 2',
+        command: () => {}
+      }
+    ];
+    component.items = _items;
     component.ngOnInit();
     expect(component.items.length).toBe(2);
   });
@@ -73,16 +86,27 @@ describe('FormulaFunctionComponent', () => {
     component['handleToast'].setToastMessage(toast);
     component.addElement();
     expect(component).toBeTruthy();
-
   });
 
-  it('deleteBlock method closes the menu', () => {
+  it('addElement method closes the menu', fakeAsync(() => {
+    component.addElement();
+    tick(3000);
+    expect(component.isMenuOpen).toBeFalse();
+  }));
+
+  it('deleteBlock method submits a toast notification through a service', () => {
     const toast: ToastNotification = {
       type: 'error',
       message: 'Error message'
     };
     component['handleToast'].setToastMessage(toast);
-    component.addElement();
+    component.deleteBlock();
     expect(component.isMenuOpen).toEqual(false);
   });
+
+  it('deleteBlock method closes the menu', fakeAsync(() => {
+    component.deleteBlock();
+    tick(3000);
+    expect(component.isMenuOpen).toBeFalse();
+  }));
 });

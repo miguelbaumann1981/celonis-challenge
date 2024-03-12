@@ -92,8 +92,6 @@ export class FormulaOperatorComponent implements OnInit {
         return side?.name;
       case Type.Variable:
         return side?.name;
-      case Type.Paren:
-        return side?.name;
     }
   }
 

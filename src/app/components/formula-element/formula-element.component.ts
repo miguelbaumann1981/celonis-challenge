@@ -34,8 +34,8 @@ export class FormulaElementComponent implements OnInit, OnDestroy {
     ** Method to get the value types from service
   */
   private getValueTypesService(): void {
-    this.operatorsService.getTypeValues().pipe(takeUntil(this.destroy$)).subscribe((files) => {
-      this.valueTypes = files.data;
+    this.operatorsService.getTypeValues().pipe(takeUntil(this.destroy$)).subscribe((response) => {
+      this.valueTypes = response.data;
       this.valueTypes.map((value) => {
         if (this.type === value.key) {
           this.selectedValueType.push(value);

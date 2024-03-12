@@ -101,11 +101,17 @@ describe('FormulaOperatorComponent', () => {
     expect(spy1).toHaveBeenCalled();
     expect(spy2).toHaveBeenCalled();
     expect(component.formulaBlockArray.push('4 SUBTRACTION 3')).toBeTruthy();
-
-
   });
 
+
   it('assignmentValuesLeftBlock method assigns a value to the left expression', () => {
+    component.leftSide = jsonOperation2.left;
+    component.assignmentValuesLeftBlock();
+    expect(component.leftExpression).toEqual(jsonOperation2.left.expression);
+    expect(component.leftSingleElement.type).toBe('NUMBER');
+    expect(component.leftSingleElement.value).toBe(4);
+    expect(component.leftSingleElement.arguments).toEqual([]);
+
     component.leftSide = jsonOperation1.left;
     component.assignmentValuesLeftBlock();
     expect(component.leftExpression).toEqual(jsonOperation1.left.expression);
@@ -117,9 +123,30 @@ describe('FormulaOperatorComponent', () => {
     expect(component.rightSingleElement.type).toBe('NUMBER');
     expect(component.rightSingleElement.value).toBe(3);
     expect(component.rightSingleElement.arguments).toEqual([]);
+
+    component.rightSide = jsonOperation1.right;
+    component.assignmentValuesRightBlock();
+    expect(component.rightExpression).toEqual(jsonOperation1.right.expression);
   });
   
-  it('mapValueByType method returns a value', () => {
+  it('mapValueByType method returns a type NUMBER value', () => {
+    const jsonOperation: any = {
+      type: "SUBTRACTION",
+      left: {
+        type: "NUMBER",
+        value: 4
+      },
+      right: {
+        type: "PI",
+        value: 3.14
+      }
+    };
+    component.leftSide = jsonOperation.left;
+    component.mapValueByType(jsonOperation.left, jsonOperation.left.type);
+    expect(component.leftSide.value).toBe(4);
+  });
+
+  it('mapValueByType method returns a type PI value', () => {
     const jsonOperation: any = {
       type: "SUBTRACTION",
       left: {
@@ -131,12 +158,66 @@ describe('FormulaOperatorComponent', () => {
         value: "PI"
       }
     };
+    component.rightSide = jsonOperation.right;
+    component.mapValueByType(jsonOperation.right, jsonOperation.right.type);
+    expect(component.rightSide.value).toBe("PI");
+  });
+
+  it('mapValueByType method returns a type FUNCTION value', () => {
+    const jsonOperation: any = {
+      "type": "DIVISION",
+      "left": {
+        "type": "FUNCTION",
+        "name": "SQR",
+        "arguments": [
+          {
+            "type": "ADDITION",
+            "left": {
+              "type": "NUMBER",
+              "value": 1
+            },
+            "right": {
+              "type": "NUMBER",
+              "value": 8
+            }
+          }
+        ]
+      },
+      "right": {
+        "type": "PAREN",
+        "expression": {
+          "type": "ADDITION",
+          "left": {
+            "type": "NUMBER",
+            "value": 2
+          },
+          "right": {
+            "type": "NUMBER",
+            "value": 9
+          }
+        }
+      }
+    };
     component.leftSide = jsonOperation.left;
     component.mapValueByType(jsonOperation.left, jsonOperation.left.type);
-    expect(component.leftSide.value).toBe(4);
+    expect(component.leftSide.name).toBe('SQR');
+  });
 
-    component.mapValueByType(jsonOperation.right, jsonOperation.right.type);
-    expect(component.rightSide.value).toBe('PI');
+  it('mapValueByType method returns a type VARIABLE value', () => {
+    const jsonOperation: any = {
+      "type": "ADDITION",
+      "left": {
+        "type": "VARIABLE",
+        "name": "$a"
+      },
+      "right": {
+        "type": "NUMBER",
+        "value": 9
+      }
+    };
+    component.leftSide = jsonOperation.left;
+    component.mapValueByType(jsonOperation.left, jsonOperation.left.type);
+    expect(component.leftSide.name).toBe("$a");
   });
 
   it('onElementEvent submits a single element and toast notification', () => {
@@ -159,8 +240,8 @@ describe('FormulaOperatorComponent', () => {
     };
     component['handleFormula'].setSingleElement(symbol);
     component['handleToast'].setToastMessage(toast);
-    component.onElementEvent(symbol);
-    expect(component).not.toBeFalsy();
+    component.onSymbolEvent(symbol);
+    expect(component).toBeTruthy();
   });
 
 });

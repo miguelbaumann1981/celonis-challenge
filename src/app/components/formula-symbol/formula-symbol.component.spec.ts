@@ -33,6 +33,9 @@ const dataService: any = {
           label: "!"
         }
   ]
+};
+const OperatorsServiceMock =  {
+  getOperators: () => of(dataService)
 }
 
 describe('FormulaSymbolComponent', () => {
@@ -45,9 +48,14 @@ describe('FormulaSymbolComponent', () => {
       imports: [
         HttpClientTestingModule
       ],
-      declarations: [ FormulaSymbolComponent ],
+      declarations: [ 
+        FormulaSymbolComponent 
+      ],
       providers: [
-        OperatorsService
+        {
+          provide: OperatorsService,
+          useValue: OperatorsServiceMock
+        }
       ],
       schemas: [
         CUSTOM_ELEMENTS_SCHEMA,
@@ -60,13 +68,10 @@ describe('FormulaSymbolComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(FormulaSymbolComponent);
     component = fixture.componentInstance;
-    service = fixture.debugElement.injector.get(OperatorsService);
     fixture.detectChanges();
   });
 
   it('getOperatorsService method subscribes a variable', () => {
-    spyOn(service, 'getOperators').and.returnValue(of(dataService));
-    component.symbols = dataService.data;
     component['getOperatorsService'];
     expect(component.symbols.length).toBe(6);
   });

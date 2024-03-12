@@ -26,19 +26,27 @@ const dataService: any = {
   ]
 };
 
+const OperatorsServiceMock =  {
+  getTypeValues: () => of(dataService)
+}
+
 describe('FormulaElementComponent', () => {
   let component: FormulaElementComponent;
   let fixture: ComponentFixture<FormulaElementComponent>;
-  let service: OperatorsService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
         HttpClientTestingModule
       ],
-      declarations: [ FormulaElementComponent ],
+      declarations: [ 
+        FormulaElementComponent 
+      ],
       providers: [
-        OperatorsService
+        {
+          provide: OperatorsService,
+          useValue: OperatorsServiceMock
+        }
       ],
       schemas: [
         CUSTOM_ELEMENTS_SCHEMA,
@@ -51,13 +59,10 @@ describe('FormulaElementComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(FormulaElementComponent);
     component = fixture.componentInstance;
-    service = fixture.debugElement.injector.get(OperatorsService);
     fixture.detectChanges();
   });
 
-  it('getOperatorsService method subscribes a variable', () => {
-    spyOn(service, 'getTypeValues').and.returnValue(of(dataService));
-    component.valueTypes = dataService.data;
+  it('getValueTypesService method subscribes a variable', () => {
     component['getValueTypesService'];
     expect(component.valueTypes.length).toBe(4);
   });

@@ -7,14 +7,15 @@ import { HandleFormulaService } from './services/handle-formula.service';
 import { Subject, takeUntil } from 'rxjs';
 import { HandleToastService } from './services/handle-toast.service';
 import { ToastNotification } from './interfaces/ToastNotification.js';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 const parse = Parser.parse;
 
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  providers: [TranslatePipe]
 })
 export class AppComponent implements OnInit, OnDestroy {
   private readonly destroy$ = new Subject<void>();
