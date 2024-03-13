@@ -1,10 +1,10 @@
-import { ComponentFixture, TestBed, async, fakeAsync, tick } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, NO_ERRORS_SCHEMA, Pipe } from '@angular/core';
 import { TranslateFakeLoader, TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ToastNotification } from './interfaces/ToastNotification';
-// import * as Parser from './parser/formula-parser.js';
 
+// Pipe Translate mocked
 @Pipe({name: 'translate'})
 class PipeTranslateMock {
   transform(): string {
@@ -12,6 +12,7 @@ class PipeTranslateMock {
   }
 }
 
+// Formula Operator component mocked
 @Component({
   selector: 'formula-operator',
   template: '',
@@ -31,7 +32,6 @@ export class FormulaOperatorComponentMock {
 
 
 describe('AppComponent', () => {
-
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
 
@@ -65,7 +65,6 @@ describe('AppComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
-
 
   it('handleFormulaService method sets a value to formula', () => {
     const element = '5';
@@ -102,7 +101,6 @@ describe('AppComponent', () => {
     tick(3000);
     expect(component.toastNotification).toEqual({});
   }));
-
 
   it('addOperatorComponent method create an instance of the render component', () => {
     const jsonOperation: any = {
@@ -196,10 +194,6 @@ describe('AppComponent', () => {
     expect(component.selectedLanguage).toBe('spain');
     expect(component.translate.use).toBeTruthy();
   });
-
-
-
-
 
   it('ngOnDestroy submits a subject as undefined', () => {
     const spy = spyOn(component['destroy$'], 'next');

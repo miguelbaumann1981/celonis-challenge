@@ -17,6 +17,7 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
+  background-color: $neutralExtraLightColor;
 }
 
 // VARIABLES
@@ -38,7 +39,7 @@ $standardTransition: 0.35s all ease;
 }
 ::-webkit-scrollbar-thumb {
   border-radius: 20px;
-  background: $neutral-light-color;
+  background: $neutralLightColor;
 }
 
 

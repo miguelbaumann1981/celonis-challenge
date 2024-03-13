@@ -1,35 +1,36 @@
+// ANGULAR DEPENDENCIES
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClient,  HttpClientModule } from '@angular/common/http';
+import localeEs from '@angular/common/locales/es';
+import { registerLocaleData } from '@angular/common';
 
+// TRANSLATE
+import { TranslateLoader, TranslateModule, TranslatePipe } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+// COMPONENTS
 import { AppComponent } from './app.component';
 import { FormulaParenComponent } from './components/formula-paren/formula-paren.component';
 import { FormulaOperatorComponent } from './components/formula-operator/formula-operator.component';
 import { FormulaFunctionComponent } from './components/formula-function/formula-function.component';
 import { FormulaElementComponent } from './components/formula-element/formula-element.component';
+import { FormulaSymbolComponent } from './components/formula-symbol/formula-symbol.component';
+import { ToastNotificationComponent } from './components/toast-notification/toast-notification.component';
+import { AlertNotificationComponent } from './components/alert-notification/alert-notification.component';
+
+// PRIME NG LIBRARY
 import { InputTextModule } from 'primeng/inputtext';
 import { TreeSelectModule } from 'primeng/treeselect';
-import {
-  HttpClient,
-  HttpClientModule,
-} from '@angular/common/http';
-import { TranslateLoader, TranslateModule, TranslatePipe } from '@ngx-translate/core';
-import { FormulaSymbolComponent } from './components/formula-symbol/formula-symbol.component';
 import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
 import { TooltipModule } from 'primeng/tooltip';
 import { ToastModule } from 'primeng/toast';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { MenuModule } from 'primeng/menu';
-import {RippleModule} from 'primeng/ripple';
-import { ToastNotificationComponent } from './components/toast-notification/toast-notification.component';
-import { AlertNotificationComponent } from './components/alert-notification/alert-notification.component';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
-import { LOCALE_ID } from '@angular/core';
-import localeEs from '@angular/common/locales/es';
-import { registerLocaleData } from '@angular/common';
 registerLocaleData(localeEs, 'es');
 
 @NgModule({
@@ -55,6 +56,7 @@ registerLocaleData(localeEs, 'es');
       },
     }),
     FormsModule,
+    // PRIME NG LIBRARY
     InputTextModule,
     TreeSelectModule,
     HttpClientModule,
@@ -64,12 +66,14 @@ registerLocaleData(localeEs, 'es');
     ToastModule,
     InputTextareaModule,
     MenuModule,
-    RippleModule
   ],
   providers: [
     HttpClientModule, 
     TranslatePipe,
-    {provide: LOCALE_ID, useValue: 'es'}
+    {
+      provide: LOCALE_ID, 
+      useValue: 'es'
+    }
   ],
   bootstrap: [AppComponent]
 })

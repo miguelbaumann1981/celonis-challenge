@@ -88,6 +88,4 @@ describe('FormulaElementComponent', () => {
     component.onChange(event);
     expect(spy).toHaveBeenCalledWith('4');
   });
-
-
 });

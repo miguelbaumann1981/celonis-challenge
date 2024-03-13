@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AlertNotificationComponent } from './alert-notification.component';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, Pipe } from '@angular/core';
 
-
+// Pipe Translate mocked
 @Pipe({name: 'translate'})
 class PipeTranslateMock {
   transform(): string {

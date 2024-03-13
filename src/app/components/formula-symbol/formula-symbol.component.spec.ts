@@ -34,6 +34,7 @@ const dataService: any = {
         }
   ]
 };
+
 const OperatorsServiceMock =  {
   getOperators: () => of(dataService)
 }
@@ -41,7 +42,6 @@ const OperatorsServiceMock =  {
 describe('FormulaSymbolComponent', () => {
   let component: FormulaSymbolComponent;
   let fixture: ComponentFixture<FormulaSymbolComponent>;
-  let service: OperatorsService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -86,5 +86,4 @@ describe('FormulaSymbolComponent', () => {
     component.onSelect(event);
     expect(spy).toHaveBeenCalledWith('+');
   });
-
 });

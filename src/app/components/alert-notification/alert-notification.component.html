@@ -1,6 +1,6 @@
-<div class="alert">
-    <div class="alert__main-info">
-        <p class="not-allowed__main">{{ 'alert.format_not_allowed' | translate }}</p>
+<div class="alert-notification">
+    <div class="alert-notification__main-info">
+        <p>{{ 'alert.format_not_allowed' | translate }}</p>
         <button 
             pButton 
             pRipple type="button" 
@@ -11,7 +11,7 @@
         ></button>
     </div>
 
-    <div *ngIf="showExamples" class="alert__examples">
+    <div *ngIf="showExamples" class="alert-notification__examples">
         <p>{{ 'alert.examples' | translate }}</p>
         <ul>
             <li>2 + 1</li>

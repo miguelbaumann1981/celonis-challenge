@@ -4,6 +4,7 @@ import { FormulaOperatorComponent } from './formula-operator.component';
 import { TranslateFakeLoader, TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ToastNotification } from 'src/app/interfaces/ToastNotification';
 
+// Pipe Translate mocked
 @Pipe({name: 'translate'})
 class PipeTranslateMock {
   transform(): string {
@@ -243,5 +244,4 @@ describe('FormulaOperatorComponent', () => {
     component.onSymbolEvent(symbol);
     expect(component).toBeTruthy();
   });
-
 });

@@ -1,5 +1,4 @@
 import { Component, ComponentFactoryResolver, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
-
 // @ts-ignore
 import * as Parser from './parser/formula-parser.js';
 import { FormulaOperatorComponent } from './components/formula-operator/formula-operator.component';
@@ -8,6 +7,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { HandleToastService } from './services/handle-toast.service';
 import { ToastNotification } from './interfaces/ToastNotification.js';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+
 const parse = Parser.parse;
 
 
@@ -23,13 +23,9 @@ export class AppComponent implements OnInit, OnDestroy {
   @ViewChild('dynamicComponentContainer', { read: ViewContainerRef }) 
   dynamicComponentContainer!: ViewContainerRef;
 
-  // formula: string = "SQRT (SQR($b) - 4 * $a)";
-  // formula: string = "($b + SQRT (SQR($b) - 4 * $a)) / (2 * $a)";
-  // formula: string = "(4 - 3) / (2 * $a)";
   public formula: string = "(4 - SQR($b - 8)) / (2 * $a)";
-  // public formula: string = "(2 * $a)";
   public syntaxTree: any;
-  public syntaxTreeJson: string = "";
+  public syntaxTreeJson: string = '';
   public formulaBuiltArray: string[] = [];
   public toastNotification: ToastNotification = {};
   public selectedLanguage: string = 'uk';

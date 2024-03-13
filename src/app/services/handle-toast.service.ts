@@ -10,10 +10,16 @@ export class HandleToastService {
   
   constructor() { }
 
+  /*
+    ** Method to set a new toast notification and store in a behaviour subject
+  */
   setToastMessage(toast: ToastNotification): void {
     this.toastMessage$.next(toast);
   }
 
+  /*
+    ** Method to get the toast notification as observable
+  */
   getToastMessage(): Observable<ToastNotification> {
     return this.toastMessage$.asObservable();
   }

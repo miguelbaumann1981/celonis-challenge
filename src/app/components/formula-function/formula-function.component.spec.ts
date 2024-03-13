@@ -4,6 +4,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, Pipe } from '@angular/core';
 import { TranslateFakeLoader, TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ToastNotification } from 'src/app/interfaces/ToastNotification';
 
+// Pipe Translate mocked
 @Pipe({name: 'translate'})
 class PipeTranslateMock {
   transform(): string {

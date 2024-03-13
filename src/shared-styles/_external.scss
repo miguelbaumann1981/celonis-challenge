@@ -1,23 +1,8 @@
 @import '_colors.scss';
 
+// PRIME NG LIBRARY
 .p-tree .p-tree-container .p-treenode .p-treenode-content .p-tree-toggler {
     display: none;
-}
-
-// .formula-paren-button.p-button.p-button-icon-only.p-button-rounded {
-//     height: 1.5rem !important;
-// }
-// .formula-paren-button.p-button-outlined .p-button-rounded .p-button-warning {
-//     height: 1.5rem !important;
-//     width: 1.5rem !important;
-// }
-// .formula-paren-button.p-button.p-button-icon-only {
-//     width: 1.5rem !important;
-// }
-.p-button.p-button-warning.p-button-outlined, .p-buttonset.p-button-warning > .p-button.p-button-outlined, .p-splitbutton.p-button-warning > .p-button.p-button-outlined {
-    background-color: #fffaec !important;
-    // color: rgb(247, 233, 197) !important;
-    border-color: rgb(247, 233, 197) !important;
 }
 
 .formula-element-symbol .p-treeselect {
