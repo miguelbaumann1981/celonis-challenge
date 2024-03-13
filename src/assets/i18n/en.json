@@ -8,7 +8,8 @@
         "input_formula": "Input formula",
         "input_formula_button": "Parse and update AST View",
         "json_visualizer_button": "Convert AST to Formula",
-        "converter_title": "Visualizer to Formula"
+        "converter_title": "Visualizer to Formula",
+        "suggestions": "Suggestions"
     },
     "paren": {
         "tooltip_button": "Show options",

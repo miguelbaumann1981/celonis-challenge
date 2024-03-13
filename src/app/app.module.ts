@@ -30,6 +30,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { ToastModule } from 'primeng/toast';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { MenuModule } from 'primeng/menu';
+import { DialogModule } from 'primeng/dialog';
 
 registerLocaleData(localeEs, 'es');
 
@@ -66,6 +67,7 @@ registerLocaleData(localeEs, 'es');
     ToastModule,
     InputTextareaModule,
     MenuModule,
+    DialogModule
   ],
   providers: [
     HttpClientModule, 

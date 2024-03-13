@@ -195,6 +195,11 @@ describe('AppComponent', () => {
     expect(component.translate.use).toBeTruthy();
   });
 
+  it('showSuggestions method displays the suggestions dialog', () => {
+    component.showSuggestions();
+    expect(component.isDialogShown).toBeTrue();
+  });
+
   it('ngOnDestroy submits a subject as undefined', () => {
     const spy = spyOn(component['destroy$'], 'next');
     component.ngOnDestroy();

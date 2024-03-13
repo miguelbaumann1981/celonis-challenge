@@ -30,6 +30,7 @@ export class AppComponent implements OnInit, OnDestroy {
   public toastNotification: ToastNotification = {};
   public selectedLanguage: string = 'uk';
   public isConverterEnabled: boolean = false;
+  public isDialogShown: boolean = false;
  
 
   constructor(
@@ -126,6 +127,13 @@ export class AppComponent implements OnInit, OnDestroy {
     if (this.selectedLanguage === 'spain') {
       this.translate.use('es');
     }
+  }
+
+  /*
+    ** Method to display the dialog
+  */
+  showSuggestions() {
+    this.isDialogShown = true;
   }
 
   ngOnDestroy(): void {

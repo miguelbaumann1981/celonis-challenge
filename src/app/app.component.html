@@ -20,13 +20,18 @@
   <!-- #region CONTENT -->
   <main class="app-container__content">
     <!-- #region WELCOME -->
-    <h1 class="app-container__content--welcome">{{ 'main.welcome' | translate }}</h1>
+    <h1 class="app-container__content--welcome">
+      {{ 'main.welcome' | translate }}
+      <button pButton pRipple type="button" icon="pi pi-bell" class="p-button-rounded p-button-warning p-button-text" pTooltip="{{ 'main.suggestions' | translate }}"
+      (click)="showSuggestions()"></button>
+    </h1>
     <!-- #endregion -->
 
     <!-- #region VISUALIZER -->
     <section class="app-container__content--visualizer">
       <!-- #region INPUT FORMULA -->
       <div class="app-container__content--visualizer-block">
+        
         <span class="p-float-label">
           <textarea 
             inputId="textarea" 
@@ -87,3 +92,15 @@
   </div>
   <!-- #endregion -->
 </div>
+
+  <!-- ------------------------------------------- -->
+  <!-- #region DIALOG SUGGESTIONS -->
+<p-dialog header="{{ 'main.suggestions' | translate }}" [(visible)]="isDialogShown" [style]="{width: '30vw'}" [baseZIndex]="10000">
+  <ul>
+      <li>2 + 1</li>
+      <li>(4 - 3) / (2 * $a)</li>
+      <li>(6 + 2) / 4</li>
+      <li>(4 - SQR($b - 8)) / (2 * $a)</li>
+  </ul>
+</p-dialog>
+  <!-- #endregion -->
